@@ -3,15 +3,15 @@
 ## Method under test: `Board()`
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
-|---|---|---|---|---|
-| TC1 | `Board()`, `getSize()` | New board is constructed | Board size is `8` | :x: |
-| TC2 | `Board()`, `getSquare(int row, int col)` | New board is constructed | All valid squares are empty | :x: |
+|---|---|---|---|--------------|
+| TC1 | `Board()`, `getSize()` | New board is constructed | Board size is `8` | [x]          |
+| TC2 | `Board()`, `getSquare(int row, int col)` | New board is constructed | All valid squares are empty | [x]          |
 
 ## Method under test: `getSize()`
 
-| ID | Method(s) under test | System under test | Expected output | Implemented? |
-|---|---|---|---|---|
-| TC3 | `getSize()` | New board is constructed | Returns `8` | :x: |
+| ID | Method(s) under test | System under test | Expected output | Implemented?    |
+|---|---|---|---|-----------------|
+| TC3 | `getSize()` | New board is constructed | Returns `8` | [x] Done in TC1 |
 
 ## Method under test: `getSquare(int row, int col)`
 
