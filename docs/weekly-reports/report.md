@@ -7,6 +7,14 @@
 
 
 
+# Week 4 (04/20/2026-04/26/2026) 
+**Planning and Progress Tracking**:
+1. [done] Ryan Lei: Set up BVA for Board class, working on implementation
+2. [done] Ryan Lei: Created first github project with details and acceptance criteria
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/6
+
+
+
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
 1. [done] Person: Task (Links to PR)
