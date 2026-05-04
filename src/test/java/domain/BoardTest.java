@@ -32,4 +32,32 @@ public class BoardTest {
 
         assertDoesNotThrow(() -> board.getSquare(7, 7));
     }
+
+    @Test
+    public void GetSquare_WithNegativeRow_ThrowsException() {
+        Board board = new Board();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getSquare(-1, 0));
+    }
+
+    @Test
+    public void GetSquare_WithRowTooLarge_ThrowsException() {
+        Board board = new Board();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getSquare(8, 0));
+    }
+
+    @Test
+    public void GetSquare_WithNegativeColumn_ThrowsException() {
+        Board board = new Board();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getSquare(0, -1));
+    }
+
+    @Test
+    public void GetSquare_WithColumnTooLarge_ThrowsException() {
+        Board board = new Board();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getSquare(0, 8));
+    }
 }
