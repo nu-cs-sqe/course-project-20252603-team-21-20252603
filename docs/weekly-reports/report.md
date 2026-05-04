@@ -7,6 +7,25 @@
 
 
 
+# Week 4 (04/20/2026-04/26/2026) 
+**Planning and Progress Tracking**:
+1. [done] Ryan Lei: Set up BVA for Board class, working on implementation
+2. [done] Ryan Lei: Created first github project with details and acceptance criteria
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/6
+
+# Week 5 (04/27/26-05/03/2026)
+**Planning and Progress Tracking**:
+Finishing from Week 4: 
+1. [done] Sid Javeri: Created Game Setup Phase design document and project board issue with user story, acceptance criteria, use case, and definition of done
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/8
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/issues/9
+
+1. [done] Ryan Lei: Fixed some inconsistencies with the design document, finished currently implementable test cases for Board, merged into main
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/12
+2. [50% done] Ryan Lei: Start working on Piece, did BVA basic, began working on test cases and set up enums, piece class, and test class
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
+
+
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
 1. [done] Person: Task (Links to PR)
