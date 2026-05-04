@@ -1,3 +1,4 @@
+
 # Game Setup Phase Design
 
 ## Feature Scope
@@ -40,6 +41,7 @@ Methods:
 
 - getSquare(int row, int col)
     - Returns: Piece at given position
+    - Throws IndexOutOfBoundsException if row or col is outside 0–7
  
 - setupInitialPosition()
     - Behavior: Places all pieces in standard starting positions
@@ -48,6 +50,7 @@ Methods:
 
 - isEmpty(int row, int col)
     - Returns: true if no piece exists at position
+    - Throws IndexOutOfBoundsException if row or col is outside 0–7
 ---
 
 ### Piece
