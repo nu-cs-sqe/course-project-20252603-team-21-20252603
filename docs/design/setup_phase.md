@@ -35,13 +35,16 @@ Responsibilities:
 - Places pieces in starting positions
 
 Methods:
+- getSize()
+    - Returns 8
+
+- getSquare(int row, int col)
+    - Returns: Piece at given position
+ 
 - setupInitialPosition()
     - Behavior: Places all pieces in standard starting positions
     - Assumption: Board is empty before initialization
-    - Edge Case: If board is not empty, behavior is undefined or may overwrite
-
-- getPiece(int row, int col)
-    - Returns: Piece at given position
+    - Edge Case: If board is not empty, behavior is undefined or may overwrite  
 
 - isEmpty(int row, int col)
     - Returns: true if no piece exists at position
