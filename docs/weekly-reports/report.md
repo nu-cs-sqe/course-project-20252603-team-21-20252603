@@ -20,6 +20,10 @@ Finishing from Week 4:
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/8
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/issues/9
 
+1. [done] Ryan Lei: Fixed some inconsistencies with the design document, finished currently implementable test cases for Board, merged into main
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/12
+2. [50% done] Ryan Lei: Start working on Piece, did BVA basic, began working on test cases and set up enums, piece class, and test class
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
 
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
