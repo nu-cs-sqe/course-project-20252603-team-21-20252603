@@ -5,6 +5,10 @@ public class Piece {
     private PieceColor color;
 
     public Piece(PieceType type, PieceColor color) {
+        if (type == null) {
+            throw new IllegalArgumentException();
+        }
+
         this.color = color;
     }
 
