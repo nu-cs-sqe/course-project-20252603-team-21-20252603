@@ -3,6 +3,7 @@ package domain;
 public class Piece {
 
     private PieceColor color;
+    private PieceType type;
 
     public Piece(PieceType type, PieceColor color) {
         if (type == null || color == null) {
@@ -10,10 +11,11 @@ public class Piece {
         }
 
         this.color = color;
+        this.type = type;
     }
 
     public PieceType getType() {
-        return PieceType.KING;
+        return type;
     }
 
     public PieceColor getColor() {

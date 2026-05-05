@@ -33,4 +33,11 @@ public class PieceTest {
             new Piece(PieceType.KING, null);
         });
     }
+
+    @Test
+    public void PieceConstructor_WithQueenBlack_ReturnsType() {
+        Piece piece = new Piece(PieceType.QUEEN, PieceColor.BLACK);
+
+        assertEquals(PieceType.QUEEN, piece.getType());
+    }
 }
