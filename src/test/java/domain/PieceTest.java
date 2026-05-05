@@ -26,4 +26,11 @@ public class PieceTest {
             new Piece(null, PieceColor.WHITE);
         });
     }
+
+    @Test
+    public void PieceConstructor_WithNullColor_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Piece(PieceType.KING, null);
+        });
+    }
 }
