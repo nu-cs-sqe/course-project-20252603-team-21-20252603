@@ -40,4 +40,11 @@ public class PieceTest {
 
         assertEquals(PieceType.QUEEN, piece.getType());
     }
+
+    @Test
+    public void PieceConstructor_WithQueenBlack_ReturnsColor() {
+        Piece piece = new Piece(PieceType.QUEEN, PieceColor.BLACK);
+
+        assertEquals(PieceColor.BLACK, piece.getColor());
+    }
 }
