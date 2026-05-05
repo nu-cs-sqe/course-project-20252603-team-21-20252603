@@ -12,4 +12,11 @@ public class PieceTest {
 
         assertEquals(PieceType.KING, piece.getType());
     }
+
+    @Test
+    public void PieceConstructor_WithKingWhite_ReturnsColor() {
+        Piece piece = new Piece(PieceType.KING, PieceColor.WHITE);
+
+        assertEquals(PieceColor.WHITE, piece.getColor());
+    }
 }

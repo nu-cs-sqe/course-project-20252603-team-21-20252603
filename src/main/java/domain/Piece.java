@@ -1,11 +1,18 @@
 package domain;
 
 public class Piece {
-    public Piece(PieceType type, PieceColor color) {
 
+    private PieceColor color;
+
+    public Piece(PieceType type, PieceColor color) {
+        this.color = color;
     }
 
     public PieceType getType() {
         return PieceType.KING;
+    }
+
+    public PieceColor getColor() {
+        return color;
     }
 }
