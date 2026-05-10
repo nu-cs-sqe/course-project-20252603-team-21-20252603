@@ -25,6 +25,11 @@ Finishing from Week 4:
 2. [50% done] Ryan Lei: Start working on Piece, did BVA basic, began working on test cases and set up enums, piece class, and test class
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
 
+# Week 6 (05/04/26-05/10/2026)
+**Planning and Progress Tracking**:
+1. [done] Sid Javeri: Completed Piece implementation using TDD and BVA, implemented constructor validation, getters, and enums
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
+
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
