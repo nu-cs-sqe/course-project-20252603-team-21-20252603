@@ -61,6 +61,8 @@ Good follow-through on process this week. The main thing to improve now is to co
 
 There is also some evidence of collaboration across teammates in the shared draft PR and the weekly report updates, which is encouraging. 
 
+Also, the older feedback branches can be cleaned up when convenient to keep the branch list easier to read.
+
 ## Review Snapshot (Just used for tracking purposes, not for feedback)
 - Reviewed latest `main` commit: `00ff72e`
 - Commit summary: Merge pull request #16 from `nu-cs-sqe/feedback-week5`
