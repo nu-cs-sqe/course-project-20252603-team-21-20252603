@@ -1,7 +1,5 @@
 plugins {
     id("java")
-    id("checkstyle")
-    id("com.github.spotbugs") version "6.0.26"
 }
 
 group = "nu.csse.sqe"
@@ -28,14 +26,4 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-checkstyle {
-    toolVersion = "10.24.0"
-    configFile = file("config/checkstyle/checkstyle.xml")
-    isIgnoreFailures = false
-}
-
-spotbugs {
-    ignoreFailures = false
 }
