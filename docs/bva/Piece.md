@@ -10,3 +10,4 @@
 | TC4 | `Piece(PieceType, PieceColor)` | Create piece with type `KING` and `null` color | Throws `IllegalArgumentException` | :white_check_mark: |
 | TC5 | `Piece(PieceType, PieceColor)`, `getType()` | Create piece with type `QUEEN` and color `BLACK` | `getType()` returns `QUEEN` | :white_check_mark: |
 | TC6 | `Piece(PieceType, PieceColor)`, `getColor()` | Create piece with type `QUEEN` and color `BLACK` | `getColor()` returns `BLACK` | :white_check_mark: |
+| TC7 | `Piece(PieceType, PieceColor)` | Create piece with `null` type and `null` color | Throws `IllegalArgumentException` | :white_check_mark: |
