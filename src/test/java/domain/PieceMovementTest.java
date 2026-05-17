@@ -104,4 +104,11 @@ public class PieceMovementTest {
         assertFalse(king.isValidMovePattern(7, 4, 5, 4));
     }
 
+    @Test
+    public void IsValidMovePattern_WithSameStartAndEndSquare_ReturnsFalse() {
+        Piece rook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertFalse(rook.isValidMovePattern(7, 0, 7, 0));
+    }
+
 }

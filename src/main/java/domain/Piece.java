@@ -23,6 +23,10 @@ public class Piece {
     }
 
     public boolean isValidMovePattern(int startRow, int startCol, int endRow, int endCol) {
+        if (startRow == endRow && startCol == endCol) {
+            return false;
+        }
+
         if (type == PieceType.PAWN && color == PieceColor.WHITE) {
             return endRow == startRow - 1 && endCol == startCol;
         }
