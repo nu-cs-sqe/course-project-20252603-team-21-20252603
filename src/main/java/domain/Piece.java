@@ -23,7 +23,6 @@ public class Piece {
     }
 
     public boolean isValidMovePattern(int startRow, int startCol, int endRow, int endCol) {
-        // pawn movement
         if (type == PieceType.PAWN && color == PieceColor.WHITE) {
             return endRow == startRow - 1 && endCol == startCol;
         }
@@ -32,7 +31,6 @@ public class Piece {
             return endRow == startRow + 1 && endCol == startCol;
         }
 
-        // rook movement
         if (type == PieceType.ROOK) {
             return startRow == endRow || startCol == endCol;
         }
@@ -45,12 +43,21 @@ public class Piece {
             return rowDifference == colDifference;
         }
 
-        // knight movement
         if (type == PieceType.KNIGHT) {
             return (rowDifference == 2 && colDifference == 1)
                     || (rowDifference == 1 && colDifference == 2);
         }
 
+
+        if (type == PieceType.QUEEN) {
+            return startRow == endRow
+                    || startCol == endCol
+                    || rowDifference == colDifference;
+        }
+
+        if (type == PieceType.KING) {
+            return rowDifference <= 1 && colDifference <= 1;
+        }
         return false;
     }
 }

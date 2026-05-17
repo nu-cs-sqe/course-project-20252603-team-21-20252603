@@ -69,4 +69,39 @@ public class PieceMovementTest {
         assertFalse(knight.isValidMovePattern(7, 1, 5, 1));
     }
 
+    @Test
+    public void IsValidMovePattern_WithQueenMovingVertically_ReturnsTrue() {
+        Piece queen = new Piece(PieceType.QUEEN, PieceColor.WHITE);
+
+        assertTrue(queen.isValidMovePattern(7, 3, 4, 3));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithQueenMovingDiagonally_ReturnsTrue() {
+        Piece queen = new Piece(PieceType.QUEEN, PieceColor.WHITE);
+
+        assertTrue(queen.isValidMovePattern(7, 3, 4, 6));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithQueenMovingLikeKnight_ReturnsFalse() {
+        Piece queen = new Piece(PieceType.QUEEN, PieceColor.WHITE);
+
+        assertFalse(queen.isValidMovePattern(7, 3, 5, 4));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithKingMovingOneSquare_ReturnsTrue() {
+        Piece king = new Piece(PieceType.KING, PieceColor.WHITE);
+
+        assertTrue(king.isValidMovePattern(7, 4, 6, 4));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithKingMovingMoreThanOneSquare_ReturnsFalse() {
+        Piece king = new Piece(PieceType.KING, PieceColor.WHITE);
+
+        assertFalse(king.isValidMovePattern(7, 4, 5, 4));
+    }
+
 }
