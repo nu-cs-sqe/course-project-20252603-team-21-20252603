@@ -55,4 +55,18 @@ public class PieceMovementTest {
         assertFalse(bishop.isValidMovePattern(7, 2, 5, 2));
     }
 
+    @Test
+    public void IsValidMovePattern_WithKnightMovingInLShape_ReturnsTrue() {
+        Piece knight = new Piece(PieceType.KNIGHT, PieceColor.WHITE);
+
+        assertTrue(knight.isValidMovePattern(7, 1, 5, 2));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithKnightMovingStraight_ReturnsFalse() {
+        Piece knight = new Piece(PieceType.KNIGHT, PieceColor.WHITE);
+
+        assertFalse(knight.isValidMovePattern(7, 1, 5, 1));
+    }
+
 }

@@ -45,6 +45,11 @@ public class Piece {
             return rowDifference == colDifference;
         }
 
+        // knight movement
+        if (type == PieceType.KNIGHT) {
+            return (rowDifference == 2 && colDifference == 1)
+                    || (rowDifference == 1 && colDifference == 2);
+        }
 
         return false;
     }
