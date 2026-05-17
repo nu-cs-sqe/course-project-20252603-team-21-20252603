@@ -81,6 +81,20 @@ public class GameTest {
         }
     }
 
+    @Test
+    public void InitializeGame_WithAlreadyInitializedGame_ResetsToStandardStartingPosition() {
+        Game game = new Game();
+
+        game.initializeGame();
+        game.initializeGame();
+
+        assertPiece(game.getBoard(), 7, 4, PieceType.KING, PieceColor.WHITE);
+        assertPiece(game.getBoard(), 0, 4, PieceType.KING, PieceColor.BLACK);
+        assertPiece(game.getBoard(), 6, 0, PieceType.PAWN, PieceColor.WHITE);
+        assertPiece(game.getBoard(), 1, 0, PieceType.PAWN, PieceColor.BLACK);
+        assertTrue(game.getBoard().isEmpty(3, 3));
+    }
+
     private void assertPiece(
             Board board,
             int row,
