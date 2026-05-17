@@ -1,5 +1,5 @@
 package domain;
 
 public enum PieceType {
-    KING
+    KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
 }
