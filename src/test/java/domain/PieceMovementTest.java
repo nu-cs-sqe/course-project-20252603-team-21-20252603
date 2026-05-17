@@ -20,6 +20,11 @@ public class PieceMovementTest {
         assertTrue(pawn.isValidMovePattern(1, 0, 2, 0));
     }
 
+    @Test
+    public void IsValidMovePattern_WithPawnMovingBackward_ReturnsFalse() {
+        Piece pawn = new Piece(PieceType.PAWN, PieceColor.WHITE);
 
+        assertFalse(pawn.isValidMovePattern(6, 0, 7, 0));
+    }
 
 }
