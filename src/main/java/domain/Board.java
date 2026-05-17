@@ -17,12 +17,21 @@ public class Board {
     }
 
     public void setupInitialPosition() {
+        clearBoard();
         setupBackRow(0, PieceColor.BLACK);
         setupPawnRow(1, PieceColor.BLACK);
         setupPawnRow(6, PieceColor.WHITE);
         setupBackRow(7, PieceColor.WHITE);
     }
 
+
+    private void clearBoard() {
+        for (int row = 0; row < getSize(); row++) {
+            for (int col = 0; col < getSize(); col++) {
+                squares[row][col] = null;
+            }
+        }
+    }
 
     private void setupBackRow(int row, PieceColor color) {
         squares[row][0] = new Piece(PieceType.ROOK, color);

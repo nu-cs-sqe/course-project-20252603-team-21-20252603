@@ -167,7 +167,34 @@ public class BoardTest {
         }
     }
 
+    @Test
+    public void SetupInitialPosition_WithAlreadySetupBoard_ResetsToStandardStartingPosition() {
+        Board board = new Board();
 
+        board.setupInitialPosition();
+        board.setupInitialPosition();
+
+        assertEquals(32, countPieces(board));
+        assertPiece(board, 7, 4, PieceType.KING, PieceColor.WHITE);
+        assertPiece(board, 0, 4, PieceType.KING, PieceColor.BLACK);
+        assertTrue(board.isEmpty(3, 3));
+    }
+
+
+
+    private int countPieces(Board board) {
+        int count = 0;
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                if (!board.isEmpty(row, col)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
 
     private void assertPiece(
             Board board,
