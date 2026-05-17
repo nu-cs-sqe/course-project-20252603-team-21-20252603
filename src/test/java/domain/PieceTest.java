@@ -47,4 +47,12 @@ public class PieceTest {
 
         assertEquals(PieceColor.BLACK, piece.getColor());
     }
+
+
+    @Test
+    public void PieceConstructor_WithNullTypeAndNullColor_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Piece(null, null);
+        });
+    }
 }
