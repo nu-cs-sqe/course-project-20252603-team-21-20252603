@@ -26,7 +26,7 @@ Finishing from Week 4:
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
 
 
-# Week 6 (05/11/2026-05/17/2026)
+# Week 7 (05/11/2026-05/17/2026)
 **Planning and Progress Tracking**:
 1. [done] Ryan Lei, Sid Javeri: Finished Piece Implementation with TDD, all cases for Piece BVA done
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
