@@ -68,6 +68,19 @@ public class GameTest {
         assertPiece(game.getBoard(), 1, 0, PieceType.PAWN, PieceColor.BLACK);
     }
 
+    @Test
+    public void InitializeGame_WithNewGame_KeepsMiddleSquaresEmpty() {
+        Game game = new Game();
+
+        game.initializeGame();
+
+        for (int row = 2; row <= 5; row++) {
+            for (int col = 0; col < game.getBoard().getSize(); col++) {
+                assertTrue(game.getBoard().isEmpty(row, col));
+            }
+        }
+    }
+
     private void assertPiece(
             Board board,
             int row,
