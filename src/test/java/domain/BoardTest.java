@@ -67,4 +67,16 @@ public class BoardTest {
 
         assertTrue(board.isEmpty(0, 0));
     }
+
+    @Test
+    public void SetupInitialPosition_WithWhitePawnStartingSquare_PlacesWhitePawn() {
+        Board board = new Board();
+
+        board.setupInitialPosition();
+
+        Piece piece = board.getSquare(6, 0);
+
+        assertEquals(PieceType.PAWN, piece.getType());
+        assertEquals(PieceColor.WHITE, piece.getColor());
+    }
 }

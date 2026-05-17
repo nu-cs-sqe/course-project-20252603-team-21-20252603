@@ -2,17 +2,23 @@ package domain;
 
 public class Board {
 
-    private final Object[][] squares = new Object[8][8];
+    private final Piece[][] squares = new Piece[8][8];
 
     public int getSize() {
         return 8;
     }
 
-    public Object getSquare(int row, int col) {
+    public Piece getSquare(int row, int col) {
         return squares[row][col];
     }
 
     public boolean isEmpty(int row, int col) {
         return squares[row][col] == null;
     }
+
+    public void setupInitialPosition() {
+        squares[6][0] = new Piece(PieceType.PAWN, PieceColor.WHITE);
+    }
+
+
 }
