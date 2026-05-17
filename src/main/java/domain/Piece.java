@@ -21,4 +21,12 @@ public class Piece {
     public PieceColor getColor() {
         return color;
     }
+
+    public boolean isValidMovePattern(int startRow, int startCol, int endRow, int endCol) {
+        if (type == PieceType.PAWN && color == PieceColor.WHITE) {
+            return endRow == startRow - 1 && endCol == startCol;
+        }
+
+        return false;
+    }
 }
