@@ -41,6 +41,18 @@ public class PieceMovementTest {
         assertFalse(rook.isValidMovePattern(7, 0, 5, 2));
     }
 
+    @Test
+    public void IsValidMovePattern_WithBishopMovingDiagonally_ReturnsTrue() {
+        Piece bishop = new Piece(PieceType.BISHOP, PieceColor.WHITE);
 
+        assertTrue(bishop.isValidMovePattern(7, 2, 5, 4));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithBishopMovingVertically_ReturnsFalse() {
+        Piece bishop = new Piece(PieceType.BISHOP, PieceColor.WHITE);
+
+        assertFalse(bishop.isValidMovePattern(7, 2, 5, 2));
+    }
 
 }
