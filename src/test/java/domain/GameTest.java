@@ -31,4 +31,26 @@ public class GameTest {
 
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
+
+    @Test
+    public void InitializeGame_WithNewGame_PlacesWhiteKing() {
+        Game game = new Game();
+
+        game.initializeGame();
+
+        assertPiece(game.getBoard(), 7, 4, PieceType.KING, PieceColor.WHITE);
+    }
+
+    private void assertPiece(
+            Board board,
+            int row,
+            int col,
+            PieceType expectedType,
+            PieceColor expectedColor
+    ) {
+        Piece piece = board.getSquare(row, col);
+
+        assertEquals(expectedType, piece.getType());
+        assertEquals(expectedColor, piece.getColor());
+    }
 }

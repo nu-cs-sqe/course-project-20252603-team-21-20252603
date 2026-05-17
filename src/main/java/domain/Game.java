@@ -7,6 +7,7 @@ public class Game {
 
     public void initializeGame() {
         board = new Board();
+        board.setupInitialPosition();
         currentTurn = PieceColor.WHITE;
     }
 
