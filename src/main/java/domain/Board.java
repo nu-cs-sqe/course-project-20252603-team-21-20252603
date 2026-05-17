@@ -11,4 +11,8 @@ public class Board {
     public Object getSquare(int row, int col) {
         return squares[row][col];
     }
+
+    public boolean isEmpty(int row, int col) {
+        return squares[row][col] == null;
+    }
 }

@@ -60,4 +60,11 @@ public class BoardTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> board.getSquare(0, 8));
     }
+
+    @Test
+    public void IsEmpty_WithNewBoardSquare_ReturnsTrue() {
+        Board board = new Board();
+
+        assertTrue(board.isEmpty(0, 0));
+    }
 }
