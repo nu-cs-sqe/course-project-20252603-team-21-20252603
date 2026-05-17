@@ -119,4 +119,41 @@ public class BoardTest {
             assertEquals(PieceColor.BLACK, piece.getColor());
         }
     }
+
+
+    @Test
+    public void SetupInitialPosition_WithWhiteBackRow_PlacesWhiteBackRowPieces() {
+        Board board = new Board();
+
+        board.setupInitialPosition();
+
+        assertPiece(board, 7, 0, PieceType.ROOK, PieceColor.WHITE);
+        assertPiece(board, 7, 1, PieceType.KNIGHT, PieceColor.WHITE);
+        assertPiece(board, 7, 2, PieceType.BISHOP, PieceColor.WHITE);
+        assertPiece(board, 7, 3, PieceType.QUEEN, PieceColor.WHITE);
+        assertPiece(board, 7, 4, PieceType.KING, PieceColor.WHITE);
+        assertPiece(board, 7, 5, PieceType.BISHOP, PieceColor.WHITE);
+        assertPiece(board, 7, 6, PieceType.KNIGHT, PieceColor.WHITE);
+        assertPiece(board, 7, 7, PieceType.ROOK, PieceColor.WHITE);
+    }
+
+
+
+
+
+
+
+
+    private void assertPiece(
+            Board board,
+            int row,
+            int col,
+            PieceType expectedType,
+            PieceColor expectedColor
+    ) {
+        Piece piece = board.getSquare(row, col);
+
+        assertEquals(expectedType, piece.getType());
+        assertEquals(expectedColor, piece.getColor());
+    }
 }
