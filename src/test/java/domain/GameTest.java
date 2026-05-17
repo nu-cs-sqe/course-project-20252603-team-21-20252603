@@ -22,4 +22,13 @@ public class GameTest {
 
         assertEquals(8, game.getBoard().getSize());
     }
+
+    @Test
+    public void InitializeGame_WithNewGame_SetsCurrentTurnToWhite() {
+        Game game = new Game();
+
+        game.initializeGame();
+
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
 }
