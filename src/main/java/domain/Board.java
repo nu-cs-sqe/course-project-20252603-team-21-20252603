@@ -17,6 +17,7 @@ public class Board {
     }
 
     public void setupInitialPosition() {
+        squares[1][0] = new Piece(PieceType.PAWN, PieceColor.BLACK);
         squares[6][0] = new Piece(PieceType.PAWN, PieceColor.WHITE);
     }
 

@@ -79,4 +79,16 @@ public class BoardTest {
         assertEquals(PieceType.PAWN, piece.getType());
         assertEquals(PieceColor.WHITE, piece.getColor());
     }
+
+    @Test
+    public void SetupInitialPosition_WithBlackPawnStartingSquare_PlacesBlackPawn() {
+        Board board = new Board();
+
+        board.setupInitialPosition();
+
+        Piece piece = board.getSquare(1, 0);
+
+        assertEquals(PieceType.PAWN, piece.getType());
+        assertEquals(PieceColor.BLACK, piece.getColor());
+    }
 }
