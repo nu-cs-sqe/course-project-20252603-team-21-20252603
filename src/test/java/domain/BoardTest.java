@@ -154,7 +154,18 @@ public class BoardTest {
     }
 
 
+    @Test
+    public void SetupInitialPosition_WithMiddleRows_KeepsSquaresEmpty() {
+        Board board = new Board();
 
+        board.setupInitialPosition();
+
+        for (int row = 2; row <= 5; row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                assertTrue(board.isEmpty(row, col));
+            }
+        }
+    }
 
 
 
