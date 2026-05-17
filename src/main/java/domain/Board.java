@@ -17,10 +17,13 @@ public class Board {
     }
 
     public void setupInitialPosition() {
-        squares[1][0] = new Piece(PieceType.PAWN, PieceColor.BLACK);
+        setupPawnRow(1, PieceColor.BLACK);
+        setupPawnRow(6, PieceColor.WHITE);
+    }
 
+    private void setupPawnRow(int row, PieceColor color) {
         for (int col = 0; col < getSize(); col++) {
-            squares[6][col] = new Piece(PieceType.PAWN, PieceColor.WHITE);
+            squares[row][col] = new Piece(PieceType.PAWN, color);
         }
     }
 
