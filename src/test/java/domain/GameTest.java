@@ -41,6 +41,15 @@ public class GameTest {
         assertPiece(game.getBoard(), 7, 4, PieceType.KING, PieceColor.WHITE);
     }
 
+    @Test
+    public void InitializeGame_WithNewGame_PlacesBlackKing() {
+        Game game = new Game();
+
+        game.initializeGame();
+
+        assertPiece(game.getBoard(), 0, 4, PieceType.KING, PieceColor.BLACK);
+    }
+
     private void assertPiece(
             Board board,
             int row,
