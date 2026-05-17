@@ -27,4 +27,20 @@ public class PieceMovementTest {
         assertFalse(pawn.isValidMovePattern(6, 0, 7, 0));
     }
 
+    @Test
+    public void IsValidMovePattern_WithRookMovingVertically_ReturnsTrue() {
+        Piece rook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertTrue(rook.isValidMovePattern(7, 0, 4, 0));
+    }
+
+    @Test
+    public void IsValidMovePattern_WithRookMovingDiagonally_ReturnsFalse() {
+        Piece rook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        assertFalse(rook.isValidMovePattern(7, 0, 5, 2));
+    }
+
+
+
 }

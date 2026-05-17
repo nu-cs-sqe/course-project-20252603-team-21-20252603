@@ -31,6 +31,10 @@ public class Piece {
             return endRow == startRow + 1 && endCol == startCol;
         }
 
+        if (type == PieceType.ROOK) {
+            return startRow == endRow || startCol == endCol;
+        }
+
         return false;
     }
 }
