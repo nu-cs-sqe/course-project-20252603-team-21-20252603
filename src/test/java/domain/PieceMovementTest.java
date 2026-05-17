@@ -13,4 +13,13 @@ public class PieceMovementTest {
         assertTrue(pawn.isValidMovePattern(6, 0, 5, 0));
     }
 
+    @Test
+    public void IsValidMovePattern_WithBlackPawnMovingForwardOneSquare_ReturnsTrue() {
+        Piece pawn = new Piece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertTrue(pawn.isValidMovePattern(1, 0, 2, 0));
+    }
+
+
+
 }
