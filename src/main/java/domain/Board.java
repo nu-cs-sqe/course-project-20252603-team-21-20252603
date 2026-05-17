@@ -17,6 +17,7 @@ public class Board {
     }
 
     public void setupInitialPosition() {
+        setupBackRow(0, PieceColor.BLACK);
         setupPawnRow(1, PieceColor.BLACK);
         setupPawnRow(6, PieceColor.WHITE);
         setupBackRow(7, PieceColor.WHITE);

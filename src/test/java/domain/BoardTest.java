@@ -137,7 +137,21 @@ public class BoardTest {
         assertPiece(board, 7, 7, PieceType.ROOK, PieceColor.WHITE);
     }
 
+    @Test
+    public void SetupInitialPosition_WithBlackBackRow_PlacesBlackBackRowPieces() {
+        Board board = new Board();
 
+        board.setupInitialPosition();
+
+        assertPiece(board, 0, 0, PieceType.ROOK, PieceColor.BLACK);
+        assertPiece(board, 0, 1, PieceType.KNIGHT, PieceColor.BLACK);
+        assertPiece(board, 0, 2, PieceType.BISHOP, PieceColor.BLACK);
+        assertPiece(board, 0, 3, PieceType.QUEEN, PieceColor.BLACK);
+        assertPiece(board, 0, 4, PieceType.KING, PieceColor.BLACK);
+        assertPiece(board, 0, 5, PieceType.BISHOP, PieceColor.BLACK);
+        assertPiece(board, 0, 6, PieceType.KNIGHT, PieceColor.BLACK);
+        assertPiece(board, 0, 7, PieceType.ROOK, PieceColor.BLACK);
+    }
 
 
 
