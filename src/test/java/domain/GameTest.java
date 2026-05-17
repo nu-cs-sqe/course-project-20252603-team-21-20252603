@@ -13,4 +13,13 @@ public class GameTest {
 
         assertNotNull(game.getBoard());
     }
+
+    @Test
+    public void InitializeGame_WithNewGame_CreatesBoardWithSizeEight() {
+        Game game = new Game();
+
+        game.initializeGame();
+
+        assertEquals(8, game.getBoard().getSize());
+    }
 }
