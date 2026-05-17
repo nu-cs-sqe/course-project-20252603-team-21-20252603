@@ -26,6 +26,17 @@ Finishing from Week 4:
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
 
 
+# Week 6 (05/11/2026-05/17/2026)
+**Planning and Progress Tracking**:
+1. [done] Ryan Lei, Sid Javeri: Finished Piece Implementation with TDD, all cases for Piece BVA done
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
+2. [done] Ryan Lei, Sid Javeri: Finished Game Initialization + BVA, all tests for BVA done
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/24
+3. [done] Ryan Lei: Finished User story on Piece Movement logic, with all unique piece movements accounted for
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+
+
+
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
 1. [done] Person: Task (Links to PR)
