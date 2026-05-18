@@ -1,4 +1,5 @@
 package domain;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class Game {
 
@@ -10,6 +11,11 @@ public class Game {
         board.setupInitialPosition();
         currentTurn = PieceColor.WHITE;
     }
+
+    @SuppressFBWarnings(
+            value = "EI_EXPOSE_REP",
+            justification = "Game must expose the Board through getBoard() according to the design."
+    )
 
     public Board getBoard() {
         return board;
