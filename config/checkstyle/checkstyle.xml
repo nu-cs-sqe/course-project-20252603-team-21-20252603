@@ -5,8 +5,24 @@
 
 <module name="Checker">
     <module name="TreeWalker">
+
+        <!-- Basic structure -->
         <module name="NeedBraces"/>
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+
+        <!-- Imports -->
         <module name="AvoidStarImport"/>
         <module name="UnusedImports"/>
+
+        <!-- Naming -->
+        <module name="TypeName"/>
+        <module name="MethodName"/>
+        <module name="LocalVariableName"/>
+
+        <!-- Formatting -->
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+
     </module>
 </module>

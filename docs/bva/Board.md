@@ -29,13 +29,13 @@
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC10 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Board contains exactly `32` non-null pieces | :x: |
-| TC11 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | White back row pieces are in standard starting positions | :x: |
-| TC12 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Black back row pieces are in standard starting positions | :x: |
-| TC13 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | White pawns occupy all squares in the white pawn row | :x: |
-| TC14 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Black pawns occupy all squares in the black pawn row | :x: |
-| TC15 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Middle rows contain only empty squares | :x: |
-| TC16 | `setupInitialPosition()`, `getSquare(int, int)` | Board already contains pieces, after setup | Board is reset/overwritten into the standard starting position | :x: |
+| TC10 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Board contains exactly `32` non-null pieces | :white_check_mark: |
+| TC11 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | White back row pieces are in standard starting positions | :white_check_mark: |
+| TC12 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Black back row pieces are in standard starting positions | :white_check_mark: |
+| TC13 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | White pawns occupy all squares in the white pawn row | :white_check_mark: |
+| TC14 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Black pawns occupy all squares in the black pawn row | :white_check_mark: |
+| TC15 | `setupInitialPosition()`, `getSquare(int, int)` | Empty board, after setup | Middle rows contain only empty squares | :white_check_mark: |
+| TC16 | `setupInitialPosition()`, `getSquare(int, int)` | Board already contains pieces, after setup | Board is reset/overwritten into the standard starting position | :white_check_mark: |
 
 
 
@@ -43,10 +43,10 @@
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC17 | `isEmpty(int, int)` | New board, position `(0, 0)` | Returns `true` | :x: |
-| TC18 | `isEmpty(int, int)` | Board after `setupInitialPosition()`, occupied starting square | Returns `false` | :x: |
-| TC19 | `isEmpty(int, int)` | Board after `setupInitialPosition()`, empty middle square | Returns `true` | :x: |
-| TC20 | `isEmpty(int, int)` | Position `(-1, 0)` | Throws `IndexOutOfBoundsException` | :x: |
-| TC21 | `isEmpty(int, int)` | Position `(8, 0)` | Throws `IndexOutOfBoundsException` | :x: |
-| TC22 | `isEmpty(int, int)` | Position `(0, -1)` | Throws `IndexOutOfBoundsException` | :x: |
-| TC23 | `isEmpty(int, int)` | Position `(0, 8)` | Throws `IndexOutOfBoundsException` | :x: |
+| TC17 | `isEmpty(int, int)` | New board, position `(0, 0)` | Returns `true` | :white_check_mark: |
+| TC18 | `isEmpty(int, int)` | Board after `setupInitialPosition()`, occupied starting square | Returns `false` | :white_check_mark: |
+| TC19 | `isEmpty(int, int)` | Board after `setupInitialPosition()`, empty middle square | Returns `true` | :white_check_mark: |
+| TC20 | `isEmpty(int, int)` | Position `(-1, 0)` | Throws `IndexOutOfBoundsException` | :white_check_mark: |
+| TC21 | `isEmpty(int, int)` | Position `(8, 0)` | Throws `IndexOutOfBoundsException` | :white_check_mark: |
+| TC22 | `isEmpty(int, int)` | Position `(0, -1)` | Throws `IndexOutOfBoundsException` | :white_check_mark: |
+| TC23 | `isEmpty(int, int)` | Position `(0, 8)` | Throws `IndexOutOfBoundsException` | :white_check_mark: |
