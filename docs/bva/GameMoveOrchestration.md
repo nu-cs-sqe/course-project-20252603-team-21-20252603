@@ -11,5 +11,5 @@
 | TC5 | `movePiece` | Same-square move from `(6,0)` to `(6,0)` | Move is rejected with exception and board is unchanged | :white_check_mark: |
 | TC6 | `movePiece` | Start row below bounds: `(-1,0)` to `(0,0)` | Move is rejected with IndexOutOfBoundsException | :white_check_mark: |
 | TC7 | `movePiece` | Start row above bounds: `(8,0)` to `(7,0)` | Move is rejected with IndexOutOfBoundsException | :white_check_mark: |
-| TC8 | `movePiece` | End column below bounds: `(6,0)` to `(5,-1)` | Move is rejected with IndexOutOfBoundsException | :x: |
+| TC8 | `movePiece` | End column below bounds: `(6,0)` to `(5,-1)` | Move is rejected with IndexOutOfBoundsException | :white_check_mark: |
 | TC9 | `movePiece` | End column above bounds: `(6,0)` to `(5,8)` | Move is rejected with IndexOutOfBoundsException | :x: |
