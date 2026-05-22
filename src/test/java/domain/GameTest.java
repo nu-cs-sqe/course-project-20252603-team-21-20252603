@@ -169,12 +169,19 @@ public class GameTest {
         Board board = game.getBoard();
         Piece pawn = board.getSquare(6, 0);
 
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> game.movePiece(6, 0, 6, 0)
-        );
+        assertThrows(IllegalArgumentException.class, () -> game.movePiece(6, 0, 6, 0));
 
         assertEquals(pawn, board.getSquare(6, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_StartRowBelowBounds_ThrowsIndexOutOfBoundsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> game.movePiece(-1, 0, 0, 0));
+
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
