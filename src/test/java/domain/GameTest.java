@@ -414,6 +414,33 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_QueenPathBlockedByOpponentPieceInMiddleIntermediateSquare_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteQueen = board.getSquare(7, 3);
+        Piece blackPawn = board.getSquare(1, 0);
+
+        board.setSquare(5, 5, whiteQueen);
+        board.setSquare(7, 3, null);
+        board.setSquare(3, 3, blackPawn);
+        board.setSquare(1, 0, null);
+        board.setSquare(1, 1, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(5, 5, 1, 1)
+        );
+
+        assertEquals(whiteQueen, board.getSquare(5, 5));
+        assertEquals(blackPawn, board.getSquare(3, 3));
+        assertTrue(board.isEmpty(1, 1));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
