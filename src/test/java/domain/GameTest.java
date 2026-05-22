@@ -195,6 +195,16 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_EndColumnBelowBounds_ThrowsIndexOutOfBoundsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        assertThrows(IndexOutOfBoundsException.class, () -> game.movePiece(6, 0, 5, -1));
+
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

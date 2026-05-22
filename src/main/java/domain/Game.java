@@ -20,6 +20,9 @@ public class Game {
     }
 
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
+        validateBounds(startRow, startCol);
+        validateBounds(endRow, endCol);
+
         Piece piece = board.getSquare(startRow, startCol);
 
         if (piece == null) {
@@ -38,5 +41,11 @@ public class Game {
         board.setSquare(startRow, startCol, null);
 
         currentTurn = PieceColor.BLACK;
+    }
+
+    private void validateBounds(int row, int col) {
+        if (row < 0 || row >= board.getSize() || col < 0 || col >= board.getSize()) {
+            throw new IndexOutOfBoundsException("Position is outside the board.");
+        }
     }
 }
