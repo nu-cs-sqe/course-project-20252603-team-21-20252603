@@ -4,7 +4,7 @@
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN moves one square horizontally with no intermediate squares: WHITE queen is placed at `(4,4)`, destination `(4,5)` is empty, then `movePiece(4,4,4,5)` is called | Move succeeds, queen occupies `(4,5)`, start square `(4,4)` is empty, turn switches to BLACK | :x: |
+| TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN moves one square horizontally with no intermediate squares: WHITE queen is placed at `(4,4)`, destination `(4,5)` is empty, then `movePiece(4,4,4,5)` is called | Move succeeds, queen occupies `(4,5)`, start square `(4,4)` is empty, turn switches to BLACK | :white_check_mark: |
 | TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | ROOK horizontal path is blocked by own piece in the first intermediate square: WHITE rook at `(4,0)`, WHITE pawn at `(4,1)`, destination `(4,3)` empty, then `movePiece(4,0,4,3)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
 | TC3 | `movePiece`, `getBoard`, `getCurrentTurn` | BISHOP diagonal path is blocked by own piece in the last intermediate square: WHITE bishop at `(4,4)`, WHITE pawn at `(2,2)`, destination `(1,1)` empty, then `movePiece(4,4,1,1)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
 | TC4 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN diagonal path is blocked by opponent piece in a middle intermediate square: WHITE queen at `(5,5)`, BLACK pawn at `(3,3)`, destination `(1,1)` empty, then `movePiece(5,5,1,1)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
