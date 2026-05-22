@@ -39,6 +39,11 @@ public class Game {
             throw new IllegalArgumentException("Invalid move pattern.");
         }
 
+        if (piece.getType() != PieceType.KNIGHT
+                && isPathBlocked(startRow, startCol, endRow, endCol)) {
+            throw new IllegalArgumentException("Path is blocked.");
+        }
+
         if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
             throw new IllegalArgumentException("Cannot capture own piece.");
         }
@@ -57,5 +62,24 @@ public class Game {
         if (row < 0 || row >= board.getSize() || col < 0 || col >= board.getSize()) {
             throw new IndexOutOfBoundsException("Position is outside the board.");
         }
+    }
+
+    private boolean isPathBlocked(int startRow, int startCol, int endRow, int endCol) {
+        int rowStep = Integer.compare(endRow, startRow);
+        int colStep = Integer.compare(endCol, startCol);
+
+        int currentRow = startRow + rowStep;
+        int currentCol = startCol + colStep;
+
+        while (currentRow != endRow || currentCol != endCol) {
+            if (!board.isEmpty(currentRow, currentCol)) {
+                return true;
+            }
+
+            currentRow += rowStep;
+            currentCol += colStep;
+        }
+
+        return false;
     }
 }

@@ -215,6 +215,7 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    // Capturing Piece
     @Test
     public void MovePiece_MoveOntoOwnPiece_ThrowsExceptionAndDoesNotChangeState() {
         Game game = new Game();
@@ -357,6 +358,32 @@ public class GameTest {
         assertEquals(PieceType.QUEEN, board.getSquare(4, 5).getType());
         assertEquals(PieceColor.WHITE, board.getSquare(4, 5).getColor());
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_RookPathBlockedByOwnPieceInFirstIntermediateSquare_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteRook = board.getSquare(7, 0);
+        Piece whitePawn = board.getSquare(6, 0);
+
+        board.setSquare(4, 0, whiteRook);
+        board.setSquare(7, 0, null);
+        board.setSquare(4, 1, whitePawn);
+        board.setSquare(6, 0, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(4, 0, 4, 3)
+        );
+
+        assertEquals(whiteRook, board.getSquare(4, 0));
+        assertEquals(whitePawn, board.getSquare(4, 1));
+        assertTrue(board.isEmpty(4, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
     private void assertPiece(
