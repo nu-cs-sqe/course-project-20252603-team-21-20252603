@@ -1,0 +1,14 @@
+# BVA Analysis for Game Path Blocking
+
+## Method under test: `movePiece(startRow, startCol, endRow, endCol)`
+
+| ID | Method(s) under test | System under test | Expected output | Implemented? |
+|---|---|---|---|---|
+| TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN moves one square horizontally with no intermediate squares: WHITE queen is placed at `(4,4)`, destination `(4,5)` is empty, then `movePiece(4,4,4,5)` is called | Move succeeds, queen occupies `(4,5)`, start square `(4,4)` is empty, turn switches to BLACK | :x: |
+| TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | ROOK horizontal path is blocked by own piece in the first intermediate square: WHITE rook at `(4,0)`, WHITE pawn at `(4,1)`, destination `(4,3)` empty, then `movePiece(4,0,4,3)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
+| TC3 | `movePiece`, `getBoard`, `getCurrentTurn` | BISHOP diagonal path is blocked by own piece in the last intermediate square: WHITE bishop at `(4,4)`, WHITE pawn at `(2,2)`, destination `(1,1)` empty, then `movePiece(4,4,1,1)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
+| TC4 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN diagonal path is blocked by opponent piece in a middle intermediate square: WHITE queen at `(5,5)`, BLACK pawn at `(3,3)`, destination `(1,1)` empty, then `movePiece(5,5,1,1)` is called | Move is rejected with exception, board unchanged, turn remains WHITE | :x: |
+| TC5 | `movePiece`, `getBoard`, `getCurrentTurn` | ROOK vertical path has multiple empty intermediate squares: WHITE rook at `(7,0)`, squares `(6,0)`, `(5,0)`, `(4,0)`, and `(3,0)` are empty, then `movePiece(7,0,3,0)` is called | Move succeeds, rook occupies `(3,0)`, start square `(7,0)` is empty, turn switches to BLACK | :x: |
+| TC6 | `movePiece`, `getBoard`, `getCurrentTurn` | BISHOP captures opponent at destination with clear diagonal path: WHITE bishop at `(4,4)`, BLACK pawn at `(1,1)`, intermediate squares `(3,3)` and `(2,2)` empty, then `movePiece(4,4,1,1)` is called | BLACK pawn is removed, bishop occupies `(1,1)`, start square `(4,4)` is empty, turn switches to BLACK | :x: |
+| TC7 | `movePiece`, `getBoard`, `getCurrentTurn` | KNIGHT moves in valid L-shape even though nearby pieces exist: WHITE knight moves from `(7,1)` to `(5,2)` in the initial board | Move succeeds, knight occupies `(5,2)`, start square `(7,1)` is empty, turn switches to BLACK | :x: |
+| TC8 | `movePiece`, `getBoard`, `getCurrentTurn` | QUEEN horizontal capture attempt is blocked before destination: WHITE queen at `(4,0)`, BLACK pawn blocker at `(4,2)`, BLACK pawn destination at `(4,4)`, then `movePiece(4,0,4,4)` is called | Move is rejected with exception, blocker and destination pieces remain, turn remains WHITE | :x: |
