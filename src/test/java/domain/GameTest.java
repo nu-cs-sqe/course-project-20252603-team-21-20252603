@@ -114,6 +114,22 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WithEmptyStartSquare_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        assertTrue(board.isEmpty(4, 0));
+
+        assertThrows(IllegalArgumentException.class, () -> game.movePiece(4, 0, 3, 0));
+
+        assertTrue(board.isEmpty(4, 0));
+        assertTrue(board.isEmpty(3, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

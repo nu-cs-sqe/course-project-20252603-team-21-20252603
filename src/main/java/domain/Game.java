@@ -22,6 +22,10 @@ public class Game {
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece piece = board.getSquare(startRow, startCol);
 
+        if (piece == null) {
+            throw new IllegalArgumentException("Start square is empty.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
