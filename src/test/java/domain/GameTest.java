@@ -287,6 +287,31 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_InvalidCapturePattern_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKnight = board.getSquare(7, 1);
+        Piece blackPawn = board.getSquare(1, 0);
+
+        board.setSquare(4, 4, whiteKnight);
+        board.setSquare(7, 1, null);
+        board.setSquare(3, 3, blackPawn);
+        board.setSquare(1, 0, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(4, 4, 3, 3)
+        );
+
+        assertEquals(whiteKnight, board.getSquare(4, 4));
+        assertEquals(blackPawn, board.getSquare(3, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
