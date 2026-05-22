@@ -46,7 +46,11 @@ public class Game {
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
-        currentTurn = PieceColor.BLACK;
+        if (currentTurn == PieceColor.WHITE) {
+            currentTurn = PieceColor.BLACK;
+        } else {
+            currentTurn = PieceColor.WHITE;
+        }
     }
 
     private void validateBounds(int row, int col) {
