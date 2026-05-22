@@ -30,6 +30,10 @@ public class Game {
             throw new IllegalArgumentException("Cannot move opponent's piece.");
         }
 
+        if (!piece.isValidMovePattern(startRow, startCol, endRow, endCol)) {
+            throw new IllegalArgumentException("Invalid move pattern.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 

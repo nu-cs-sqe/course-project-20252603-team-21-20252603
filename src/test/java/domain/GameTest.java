@@ -138,13 +138,26 @@ public class GameTest {
         Board board = game.getBoard();
         Piece blackPawn = board.getSquare(1, 0);
 
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> game.movePiece(1, 0, 2, 0)
-        );
+        assertThrows(IllegalArgumentException.class, () -> game.movePiece(1, 0, 2, 0));
 
         assertEquals(blackPawn, board.getSquare(1, 0));
         assertTrue(board.isEmpty(2, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_InvalidMovementPattern_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece whitePawn = board.getSquare(6, 0);
+        Piece otherWhitePawn = board.getSquare(6, 1);
+
+        assertThrows(IllegalArgumentException.class, () -> game.movePiece(6, 0, 6, 1));
+
+        assertEquals(whitePawn, board.getSquare(6, 0));
+        assertEquals(otherWhitePawn, board.getSquare(6, 1));
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
