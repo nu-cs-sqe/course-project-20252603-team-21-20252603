@@ -337,6 +337,28 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    // Path Blocking
+    @Test
+    public void MovePiece_QueenMovesOneSquareWithNoIntermediateSquares_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteQueen = board.getSquare(7, 3);
+
+        board.setSquare(4, 4, whiteQueen);
+        board.setSquare(7, 3, null);
+
+        game.movePiece(4, 4, 4, 5);
+
+        assertTrue(board.isEmpty(4, 4));
+        assertEquals(whiteQueen, board.getSquare(4, 5));
+        assertEquals(PieceType.QUEEN, board.getSquare(4, 5).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(4, 5).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
