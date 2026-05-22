@@ -26,6 +26,10 @@ public class Game {
             throw new IllegalArgumentException("Start square is empty.");
         }
 
+        if (piece.getColor() != currentTurn) {
+            throw new IllegalArgumentException("Cannot move opponent's piece.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 

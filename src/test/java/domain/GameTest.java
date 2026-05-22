@@ -130,6 +130,24 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WrongPlayerTurn_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackPawn = board.getSquare(1, 0);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(1, 0, 2, 0)
+        );
+
+        assertEquals(blackPawn, board.getSquare(1, 0));
+        assertTrue(board.isEmpty(2, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
