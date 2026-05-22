@@ -95,6 +95,25 @@ public class GameTest {
         assertTrue(game.getBoard().isEmpty(3, 3));
     }
 
+    @Test
+    public void MovePiece_ValidWhitePawnMove_UpdatesBoardAndSwitchesTurn() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        assertFalse(board.isEmpty(6, 0));
+        assertTrue(board.isEmpty(5, 0));
+
+        Piece pawn = board.getSquare(6, 0);
+
+        game.movePiece(6, 0, 5, 0);
+
+        assertTrue(board.isEmpty(6, 0));
+        assertEquals(pawn, board.getSquare(5, 0));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

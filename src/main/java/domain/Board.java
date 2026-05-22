@@ -50,5 +50,9 @@ public class Board {
         }
     }
 
+    public void setSquare(int row, int col, Piece piece) {
+        squares[row][col] = piece;
+    }
+
 
 }
