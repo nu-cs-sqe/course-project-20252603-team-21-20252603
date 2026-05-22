@@ -215,6 +215,26 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_MoveOntoOwnPiece_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKnight = board.getSquare(7, 1);
+        Piece whitePawn = board.getSquare(6, 3);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 1, 6, 3)
+        );
+
+        assertEquals(whiteKnight, board.getSquare(7, 1));
+        assertEquals(whitePawn, board.getSquare(6, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

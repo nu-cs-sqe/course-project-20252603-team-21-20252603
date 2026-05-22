@@ -24,6 +24,8 @@ public class Game {
         validateBounds(endRow, endCol);
 
         Piece piece = board.getSquare(startRow, startCol);
+        Piece destinationPiece = board.getSquare(endRow, endCol);
+
 
         if (piece == null) {
             throw new IllegalArgumentException("Start square is empty.");
@@ -35,6 +37,10 @@ public class Game {
 
         if (!piece.isValidMovePattern(startRow, startCol, endRow, endCol)) {
             throw new IllegalArgumentException("Invalid move pattern.");
+        }
+
+        if (destinationPiece != null && destinationPiece.getColor() == piece.getColor()) {
+            throw new IllegalArgumentException("Cannot capture own piece.");
         }
 
         board.setSquare(endRow, endCol, piece);
