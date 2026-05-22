@@ -161,6 +161,23 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_SameSquareMove_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece pawn = board.getSquare(6, 0);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(6, 0, 6, 0)
+        );
+
+        assertEquals(pawn, board.getSquare(6, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
