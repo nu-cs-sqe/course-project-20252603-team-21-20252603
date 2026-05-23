@@ -562,6 +562,31 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BlackPawnMovesTwoSquaresFromStartingRow_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whitePawn = board.getSquare(6, 7);
+        Piece blackPawn = board.getSquare(1, 0);
+
+        game.movePiece(6, 7, 5, 7);
+
+        assertEquals(whitePawn, board.getSquare(5, 7));
+        assertTrue(board.isEmpty(3, 0));
+        assertTrue(board.isEmpty(2, 0));
+
+        game.movePiece(1, 0, 3, 0);
+
+        assertTrue(board.isEmpty(1, 0));
+        assertEquals(blackPawn, board.getSquare(3, 0));
+        assertEquals(PieceType.PAWN, board.getSquare(3, 0).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(3, 0).getColor());
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
