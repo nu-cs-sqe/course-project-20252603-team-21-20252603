@@ -36,7 +36,7 @@ public class Game {
         }
 
         if (isCastlingMove(piece, startRow, startCol, endRow, endCol)) {
-            castleWhite(piece, endCol);
+            castle(piece, endCol);
             switchTurn();
             return;
         }
@@ -129,6 +129,20 @@ public class Game {
                 && Math.abs(endCol - startCol) == 2;
     }
 
+    private void castle(Piece king, int endCol) {
+        if (king.getColor() == PieceColor.WHITE) {
+            castleWhite(king, endCol);
+            return;
+        }
+
+        if (king.getColor() == PieceColor.BLACK) {
+            castleBlack(king, endCol);
+            return;
+        }
+
+        throw new IllegalArgumentException("Invalid castling move.");
+    }
+
     private void castleWhite(Piece king, int endCol) {
         if (endCol == 6) {
             castleWhiteKingside(king);
@@ -141,6 +155,32 @@ public class Game {
         }
 
         throw new IllegalArgumentException("Invalid castling move.");
+    }
+
+    private void castleBlack(Piece king, int endCol) {
+        if (endCol == 6) {
+            castleBlackKingside(king);
+            return;
+        }
+
+        throw new IllegalArgumentException("Invalid castling move.");
+    }
+
+    private void castleBlackKingside(Piece king) {
+        Piece rook = board.getSquare(0, 7);
+
+        if (rook == null
+                || rook.getType() != PieceType.ROOK
+                || rook.getColor() != PieceColor.BLACK
+                || !board.isEmpty(0, 5)
+                || !board.isEmpty(0, 6)) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        board.setSquare(0, 6, king);
+        board.setSquare(0, 5, rook);
+        board.setSquare(0, 4, null);
+        board.setSquare(0, 7, null);
     }
 
     private void castleWhiteKingside(Piece king) {
