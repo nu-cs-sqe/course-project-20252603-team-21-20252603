@@ -3,6 +3,7 @@ package domain;
 public final class Piece {
 
     private PieceColor color;
+
     private PieceType type;
 
     public Piece(PieceType type, PieceColor color) {

@@ -23,6 +23,8 @@
         <!-- Formatting -->
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround"/>
+        <module name="EmptyLineSeparator"/>
+        <module name="NoWhitespaceBefore"/>
 
     </module>
 </module>
