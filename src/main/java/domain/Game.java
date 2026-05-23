@@ -52,6 +52,12 @@ public class Game {
             throw new IllegalArgumentException("Pawn cannot move forward into occupied square.");
         }
 
+        if (isPawnTwoSquareMove(piece, startRow, endRow, startCol, endCol)
+                && ((piece.getColor() == PieceColor.WHITE && startRow != 6)
+                || (piece.getColor() == PieceColor.BLACK && startRow != 1))) {
+            throw new IllegalArgumentException("Pawn can only move two squares from starting row.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
@@ -89,5 +95,11 @@ public class Game {
 
     private boolean isPawnMovingStraight(Piece piece, int startCol, int endCol) {
         return piece.getType() == PieceType.PAWN && startCol == endCol;
+    }
+
+    private boolean isPawnTwoSquareMove(Piece piece, int startRow, int endRow, int startCol, int endCol) {
+        return piece.getType() == PieceType.PAWN
+                && Math.abs(endRow - startRow) == 2
+                && startCol == endCol;
     }
 }
