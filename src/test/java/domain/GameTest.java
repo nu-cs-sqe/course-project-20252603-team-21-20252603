@@ -509,6 +509,37 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_QueenCaptureAttemptBlockedBeforeDestination_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteQueen = board.getSquare(7, 3);
+        Piece blackPawnBlocker = board.getSquare(1, 0);
+        Piece blackPawnDestination = board.getSquare(1, 1);
+
+        board.setSquare(4, 0, whiteQueen);
+        board.setSquare(7, 3, null);
+
+        board.setSquare(4, 2, blackPawnBlocker);
+        board.setSquare(1, 0, null);
+
+        board.setSquare(4, 4, blackPawnDestination);
+        board.setSquare(1, 1, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(4, 0, 4, 4)
+        );
+
+        assertEquals(whiteQueen, board.getSquare(4, 0));
+        assertEquals(blackPawnBlocker, board.getSquare(4, 2));
+        assertEquals(blackPawnDestination, board.getSquare(4, 4));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
