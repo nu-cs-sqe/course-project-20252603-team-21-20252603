@@ -58,6 +58,10 @@ public class Game {
             throw new IllegalArgumentException("Pawn can only move two squares from starting row.");
         }
 
+        if (isPawnMovingDiagonally(piece, startCol, endCol) && destinationPiece == null) {
+            throw new IllegalArgumentException("Pawn cannot move diagonally without capturing.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
@@ -101,5 +105,9 @@ public class Game {
         return piece.getType() == PieceType.PAWN
                 && Math.abs(endRow - startRow) == 2
                 && startCol == endCol;
+    }
+
+    private boolean isPawnMovingDiagonally(Piece piece, int startCol, int endCol) {
+        return piece.getType() == PieceType.PAWN && Math.abs(endCol - startCol) == 1;
     }
 }
