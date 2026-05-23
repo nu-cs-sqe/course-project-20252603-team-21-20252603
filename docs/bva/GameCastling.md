@@ -11,7 +11,7 @@
 | TC5 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted while f1 is occupied | Move rejected; king/rook/blocking piece stay in place; turn remains WHITE | ✅ |
 | TC6 | `movePiece`, `getBoard`, `getCurrentTurn` | White queenside castling attempted while d1/c1/b1 path is blocked | Move rejected; king/rook/blocking piece stay in place; turn remains WHITE | ✅ |
 | TC7 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted with no rook on h1 | Move rejected; king stays e1; destination stays empty; turn remains WHITE | ✅ |
-| TC8 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted with opponent rook on h1 | Move rejected; king and opponent rook stay in place; turn remains WHITE | :x: |
+| TC8 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted with opponent rook on h1 | Move rejected; king and opponent rook stay in place; turn remains WHITE | ✅ |
 | TC9 | `movePiece`, `getBoard`, `getCurrentTurn` | White king attempts castling-like two-square move from non-starting square | Move rejected; board unchanged; turn remains WHITE | :x: |
 | TC10 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted when destination g1 is occupied | Move rejected; board unchanged; turn remains WHITE | :x: |
 | TC11 | `movePiece`, `getBoard`, `getCurrentTurn` | White attempts castling-like move to invalid king destination, e1 to b1 | Move rejected; board unchanged; turn remains WHITE | :x: |
