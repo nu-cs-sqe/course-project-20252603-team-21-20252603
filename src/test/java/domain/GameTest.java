@@ -463,6 +463,34 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BishopCapturesOpponentWithClearDiagonalPath_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteBishop = board.getSquare(7, 2);
+        Piece blackPawn = board.getSquare(1, 0);
+
+        board.setSquare(4, 4, whiteBishop);
+        board.setSquare(7, 2, null);
+
+        board.setSquare(1, 1, blackPawn);
+        board.setSquare(1, 0, null);
+
+        board.setSquare(3, 3, null);
+        board.setSquare(2, 2, null);
+
+        game.movePiece(4, 4, 1, 1);
+
+        assertTrue(board.isEmpty(4, 4));
+        assertEquals(whiteBishop, board.getSquare(1, 1));
+        assertEquals(PieceType.BISHOP, board.getSquare(1, 1).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(1, 1).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
