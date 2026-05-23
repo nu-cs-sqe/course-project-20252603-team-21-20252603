@@ -886,6 +886,33 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteQueensideCastleWithBlockedPath_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+        Piece blocker = board.getSquare(7, 3);
+
+        board.setSquare(7, 1, null);
+        board.setSquare(7, 2, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 2)
+        );
+
+        assertEquals(whiteRook, board.getSquare(7, 0));
+        assertTrue(board.isEmpty(7, 1));
+        assertTrue(board.isEmpty(7, 2));
+        assertEquals(blocker, board.getSquare(7, 3));
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
