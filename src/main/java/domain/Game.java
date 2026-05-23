@@ -1,9 +1,11 @@
 package domain;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class Game {
 
     private Board board;
+
     private PieceColor currentTurn;
 
     public void initializeGame() {
