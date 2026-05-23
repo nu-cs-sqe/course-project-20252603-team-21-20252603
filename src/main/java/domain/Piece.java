@@ -28,7 +28,8 @@ public class Piece {
         }
 
         if (type == PieceType.PAWN && color == PieceColor.WHITE) {
-            return endRow == startRow - 1 && endCol == startCol;
+            return (endRow == startRow - 1 || endRow == startRow - 2)
+                    && endCol == startCol;
         }
 
         if (type == PieceType.PAWN && color == PieceColor.BLACK) {

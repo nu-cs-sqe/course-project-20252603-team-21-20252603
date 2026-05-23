@@ -540,6 +540,28 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    // Pawn Special Movement
+    @Test
+    public void MovePiece_WhitePawnMovesTwoSquaresFromStartingRow_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whitePawn = board.getSquare(6, 0);
+
+        assertTrue(board.isEmpty(5, 0));
+        assertTrue(board.isEmpty(4, 0));
+
+        game.movePiece(6, 0, 4, 0);
+
+        assertTrue(board.isEmpty(6, 0));
+        assertEquals(whitePawn, board.getSquare(4, 0));
+        assertEquals(PieceType.PAWN, board.getSquare(4, 0).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(4, 0).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
