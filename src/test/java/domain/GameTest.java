@@ -708,6 +708,32 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnForwardMoveIntoOccupiedSquare_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whitePawn = board.getSquare(6, 4);
+        Piece blackPawn = board.getSquare(1, 4);
+
+        board.setSquare(4, 4, whitePawn);
+        board.setSquare(6, 4, null);
+
+        board.setSquare(3, 4, blackPawn);
+        board.setSquare(1, 4, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(4, 4, 3, 4)
+        );
+
+        assertEquals(whitePawn, board.getSquare(4, 4));
+        assertEquals(blackPawn, board.getSquare(3, 4));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
