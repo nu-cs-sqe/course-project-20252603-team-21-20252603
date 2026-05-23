@@ -441,6 +441,28 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_RookMovesVerticallyThroughMultipleEmptySquares_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(6, 0, null);
+        board.setSquare(5, 0, null);
+        board.setSquare(4, 0, null);
+
+        game.movePiece(7, 0, 3, 0);
+
+        assertTrue(board.isEmpty(7, 0));
+        assertEquals(whiteRook, board.getSquare(3, 0));
+        assertEquals(PieceType.ROOK, board.getSquare(3, 0).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(3, 0).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
