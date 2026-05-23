@@ -734,6 +734,34 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BlackPawnCapturesDiagonally_RemovesCapturedPieceAndSwitchesTurn() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackPawn = board.getSquare(1, 3);
+        Piece whitePawn = board.getSquare(6, 4);
+
+        board.setSquare(3, 3, blackPawn);
+        board.setSquare(1, 3, null);
+
+        board.setSquare(4, 4, whitePawn);
+        board.setSquare(6, 4, null);
+
+        game.movePiece(6, 7, 5, 7);
+
+        game.movePiece(3, 3, 4, 4);
+
+        assertTrue(board.isEmpty(3, 3));
+        assertEquals(blackPawn, board.getSquare(4, 4));
+        assertNotEquals(whitePawn, board.getSquare(4, 4));
+        assertEquals(PieceType.PAWN, board.getSquare(4, 4).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(4, 4).getColor());
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

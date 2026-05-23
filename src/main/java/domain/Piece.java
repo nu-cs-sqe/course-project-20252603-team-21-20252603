@@ -37,8 +37,12 @@ public class Piece {
         }
 
         if (type == PieceType.PAWN && color == PieceColor.BLACK) {
-            return (endRow == startRow + 1 || endRow == startRow + 2)
+            boolean forwardMove = (endRow == startRow + 1 || endRow == startRow + 2)
                     && endCol == startCol;
+            boolean diagonalMove = endRow == startRow + 1
+                    && Math.abs(endCol - startCol) == 1;
+
+            return forwardMove || diagonalMove;
         }
 
         if (type == PieceType.ROOK) {
