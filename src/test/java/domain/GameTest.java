@@ -587,6 +587,30 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnTwoSquareMoveWithIntermediateBlocker_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whitePawn = board.getSquare(6, 0);
+        Piece blocker = board.getSquare(6, 1);
+
+        board.setSquare(5, 0, blocker);
+        board.setSquare(6, 1, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(6, 0, 4, 0)
+        );
+
+        assertEquals(whitePawn, board.getSquare(6, 0));
+        assertEquals(blocker, board.getSquare(5, 0));
+        assertTrue(board.isEmpty(4, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
