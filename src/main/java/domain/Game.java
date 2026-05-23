@@ -35,6 +35,12 @@ public class Game {
             throw new IllegalArgumentException("Cannot move opponent's piece.");
         }
 
+        if (isCastlingMove(piece, startRow, startCol, endRow, endCol)) {
+            castleKingsideWhite(piece);
+            switchTurn();
+            return;
+        }
+
         if (!piece.isValidMovePattern(startRow, startCol, endRow, endCol)) {
             throw new IllegalArgumentException("Invalid move pattern.");
         }
@@ -109,5 +115,42 @@ public class Game {
 
     private boolean isPawnMovingDiagonally(Piece piece, int startCol, int endCol) {
         return piece.getType() == PieceType.PAWN && Math.abs(endCol - startCol) == 1;
+    }
+
+    private boolean isCastlingMove(
+            Piece piece,
+            int startRow,
+            int startCol,
+            int endRow,
+            int endCol
+    ) {
+        return piece.getType() == PieceType.KING
+                && startRow == endRow
+                && Math.abs(endCol - startCol) == 2;
+    }
+
+    private void castleKingsideWhite(Piece king) {
+        Piece rook = board.getSquare(7, 7);
+
+        if (rook == null
+                || rook.getType() != PieceType.ROOK
+                || rook.getColor() != PieceColor.WHITE
+                || !board.isEmpty(7, 5)
+                || !board.isEmpty(7, 6)) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        board.setSquare(7, 6, king);
+        board.setSquare(7, 5, rook);
+        board.setSquare(7, 4, null);
+        board.setSquare(7, 7, null);
+    }
+
+    private void switchTurn() {
+        if (currentTurn == PieceColor.WHITE) {
+            currentTurn = PieceColor.BLACK;
+        } else {
+            currentTurn = PieceColor.WHITE;
+        }
     }
 }
