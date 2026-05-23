@@ -913,6 +913,32 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteKingsideCastleWithoutRook_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+
+        board.setSquare(7, 5, null);
+        board.setSquare(7, 6, null);
+        board.setSquare(7, 7, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 6)
+        );
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertTrue(board.isEmpty(7, 5));
+        assertTrue(board.isEmpty(7, 6));
+        assertTrue(board.isEmpty(7, 7));
+
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
