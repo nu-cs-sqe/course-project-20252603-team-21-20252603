@@ -15,4 +15,4 @@
 | TC9 | `movePiece`, `getBoard`, `getCurrentTurn` | White king attempts castling-like two-square move from non-starting square | Move rejected; board unchanged; turn remains WHITE | ✅ | 
 | TC10 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted when destination g1 is occupied | Move rejected; board unchanged; turn remains WHITE | ✅ |
 | TC11 | `movePiece`, `getBoard`, `getCurrentTurn` | White attempts castling-like move to invalid king destination, e1 to b1 | Move rejected; board unchanged; turn remains WHITE | ✅ |
-| TC12 | `movePiece`, `getBoard`, `getCurrentTurn` | Non-king piece attempts two-square horizontal move that resembles castling | Move rejected or handled by normal piece rules only; no rook movement occurs; turn preserved if invalid | :x: |
+| TC12 | `movePiece`, `getBoard`, `getCurrentTurn` | Non-king piece attempts two-square horizontal move that resembles castling | Move rejected or handled by normal piece rules only; no rook movement occurs; turn preserved if invalid | ✅ |
