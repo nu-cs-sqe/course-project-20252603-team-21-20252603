@@ -48,6 +48,10 @@ public class Game {
             throw new IllegalArgumentException("Cannot capture own piece.");
         }
 
+        if (isPawnMovingStraight(piece, startCol, endCol) && destinationPiece != null) {
+            throw new IllegalArgumentException("Pawn cannot move forward into occupied square.");
+        }
+
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
@@ -81,5 +85,9 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean isPawnMovingStraight(Piece piece, int startCol, int endCol) {
+        return piece.getType() == PieceType.PAWN && startCol == endCol;
     }
 }
