@@ -169,7 +169,30 @@ public class Game {
             return;
         }
 
+        if (endCol == 2) {
+            castleBlackQueenside(king);
+            return;
+        }
+
         throw new IllegalArgumentException("Invalid castling move.");
+    }
+
+    private void castleBlackQueenside(Piece king) {
+        Piece rook = board.getSquare(0, 0);
+
+        if (rook == null
+                || rook.getType() != PieceType.ROOK
+                || rook.getColor() != PieceColor.BLACK
+                || !board.isEmpty(0, 1)
+                || !board.isEmpty(0, 2)
+                || !board.isEmpty(0, 3)) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        board.setSquare(0, 2, king);
+        board.setSquare(0, 3, rook);
+        board.setSquare(0, 4, null);
+        board.setSquare(0, 0, null);
     }
 
     private void castleBlackKingside(Piece king) {
