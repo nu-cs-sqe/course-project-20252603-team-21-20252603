@@ -491,6 +491,24 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_KnightMovesInValidLShapeDespiteNearbyPieces_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKnight = board.getSquare(7, 1);
+
+        game.movePiece(7, 1, 5, 2);
+
+        assertTrue(board.isEmpty(7, 1));
+        assertEquals(whiteKnight, board.getSquare(5, 2));
+        assertEquals(PieceType.KNIGHT, board.getSquare(5, 2).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(5, 2).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
