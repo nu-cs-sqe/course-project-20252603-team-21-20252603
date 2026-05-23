@@ -1042,6 +1042,33 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_NonKingTwoSquareHorizontalMove_DoesNotCastleRook() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteQueen = board.getSquare(7, 3);
+        Piece whiteRook = board.getSquare(7, 7);
+        Piece whiteBishop = board.getSquare(7, 5);
+
+        board.setSquare(4, 4, whiteQueen);
+        board.setSquare(7, 3, null);
+        board.setSquare(4, 5, null);
+        board.setSquare(4, 6, null);
+
+        game.movePiece(4, 4, 4, 6);
+
+        assertTrue(board.isEmpty(4, 4));
+        assertEquals(whiteQueen, board.getSquare(4, 6));
+
+        assertEquals(whiteRook, board.getSquare(7, 7));
+        assertEquals(whiteBishop, board.getSquare(7, 5));
+
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
