@@ -4,8 +4,8 @@
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | White king castles kingside from e1 to g1; path f1/g1 clear; white rook on h1 | King moves to g1, rook moves to f1, e1/h1 empty, turn switches to BLACK | ✅: |
-| TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | White king castles queenside from e1 to c1; path d1/c1/b1 clear; white rook on a1 | King moves to c1, rook moves to d1, e1/a1 empty, turn switches to BLACK | :x: |
+| TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | White king castles kingside from e1 to g1; path f1/g1 clear; white rook on h1 | King moves to g1, rook moves to f1, e1/h1 empty, turn switches to BLACK | ✅ |
+| TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | White king castles queenside from e1 to c1; path d1/c1/b1 clear; white rook on a1 | King moves to c1, rook moves to d1, e1/a1 empty, turn switches to BLACK | ✅ |
 | TC3 | `movePiece`, `getBoard`, `getCurrentTurn` | Black king castles kingside from e8 to g8 on BLACK turn; path f8/g8 clear; black rook on h8 | King moves to g8, rook moves to f8, e8/h8 empty, turn switches to WHITE | :x: |
 | TC4 | `movePiece`, `getBoard`, `getCurrentTurn` | Black king castles queenside from e8 to c8 on BLACK turn; path d8/c8/b8 clear; black rook on a8 | King moves to c8, rook moves to d8, e8/a8 empty, turn switches to WHITE | :x: |
 | TC5 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling attempted while f1 is occupied | Move rejected; king/rook/blocking piece stay in place; turn remains WHITE | :x: |
