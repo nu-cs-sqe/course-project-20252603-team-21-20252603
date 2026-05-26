@@ -32,7 +32,8 @@ public class Game {
 
         return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1])
                 || isAttackedByBishopOrQueen(color, kingPosition[0], kingPosition[1])
-                || isAttackedByKnight(color, kingPosition[0], kingPosition[1]);
+                || isAttackedByKnight(color, kingPosition[0], kingPosition[1])
+                || isAttackedByPawn(color, kingPosition[0], kingPosition[1]);
     }
 
     private int[] findKingPosition(PieceColor color) {
@@ -78,6 +79,16 @@ public class Game {
                 || isEnemyKnightAt(kingColor, kingRow + 1, kingCol + 2)
                 || isEnemyKnightAt(kingColor, kingRow + 2, kingCol - 1)
                 || isEnemyKnightAt(kingColor, kingRow + 2, kingCol + 1);
+    }
+
+    private boolean isAttackedByPawn(PieceColor kingColor, int kingRow, int kingCol) {
+        if (kingColor == PieceColor.WHITE) {
+            return isEnemyPawnAt(kingColor, kingRow - 1, kingCol - 1)
+                    || isEnemyPawnAt(kingColor, kingRow - 1, kingCol + 1);
+        }
+
+        return isEnemyPawnAt(kingColor, kingRow + 1, kingCol - 1)
+                || isEnemyPawnAt(kingColor, kingRow + 1, kingCol + 1);
     }
 
     private boolean hasRookOrQueenAttackFromDirection(
@@ -146,6 +157,18 @@ public class Game {
 
     private boolean isOutsideBoard(int row, int col) {
         return row < 0 || row >= board.getSize() || col < 0 || col >= board.getSize();
+    }
+
+    private boolean isEnemyPawnAt(PieceColor kingColor, int row, int col) {
+        if (isOutsideBoard(row, col)) {
+            return false;
+        }
+
+        Piece piece = board.getSquare(row, col);
+
+        return piece != null
+                && piece.getColor() != kingColor
+                && piece.getType() == PieceType.PAWN;
     }
 
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {

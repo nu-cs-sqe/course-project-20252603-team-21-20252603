@@ -1212,6 +1212,22 @@ public class GameTest {
         assertFalse(game.isKingInCheck(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsKingInCheck_WhiteKingAttackedByBlackPawn_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(
+                6,
+                3,
+                new Piece(PieceType.PAWN, PieceColor.BLACK)
+        );
+
+        assertTrue(game.isKingInCheck(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
