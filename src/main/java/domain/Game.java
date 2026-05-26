@@ -255,6 +255,16 @@ public class Game {
     }
 
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
+        movePiece(startRow, startCol, endRow, endCol, PieceType.QUEEN);
+    }
+
+    public void movePiece(
+            int startRow,
+            int startCol,
+            int endRow,
+            int endCol,
+            PieceType promotionType
+    ) {
         validateBounds(startRow, startCol);
         validateBounds(endRow, endCol);
 
@@ -312,21 +322,27 @@ public class Game {
             throw new IllegalArgumentException("Move leaves king in check.");
         }
 
-        promotePawnIfNeeded(piece, endRow, endCol);
+        promotePawnIfNeeded(piece, endRow, endCol, promotionType);
 
         switchTurn();
     }
 
-    private void promotePawnIfNeeded(Piece piece, int endRow, int endCol) {
+    private void promotePawnIfNeeded(
+            Piece piece,
+            int endRow,
+            int endCol,
+            PieceType promotionType
+    ) {
         if (piece.getType() != PieceType.PAWN) {
             return;
         }
 
         boolean whiteReachedFinalRank = piece.getColor() == PieceColor.WHITE && endRow == 0;
-        boolean blackReachedFinalRank = piece.getColor() == PieceColor.BLACK && endRow == board.getSize() - 1;
+        boolean blackReachedFinalRank = piece.getColor() == PieceColor.BLACK
+                && endRow == board.getSize() - 1;
 
         if (whiteReachedFinalRank || blackReachedFinalRank) {
-            board.setSquare(endRow, endCol, new Piece(PieceType.QUEEN, piece.getColor()));
+            board.setSquare(endRow, endCol, new Piece(promotionType, piece.getColor()));
         }
     }
 

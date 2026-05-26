@@ -2321,6 +2321,31 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnPromotesToRook_ReturnsRookOnFinalRank() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+        board.setSquare(1, 7, new Piece(PieceType.PAWN, PieceColor.WHITE));
+
+        game.movePiece(1, 7, 0, 7, PieceType.ROOK);
+
+        assertTrue(board.isEmpty(1, 7));
+        assertEquals(PieceType.ROOK, board.getSquare(0, 7).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(0, 7).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
