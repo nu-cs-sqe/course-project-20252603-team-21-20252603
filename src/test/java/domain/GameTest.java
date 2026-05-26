@@ -2881,6 +2881,40 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnCannotEnPassantWhenDestinationOccupied_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(3, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+        board.setSquare(3, 3, new Piece(PieceType.PAWN, PieceColor.BLACK));
+        board.setSquare(2, 3, new Piece(PieceType.KNIGHT, PieceColor.WHITE));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(3, 4, 2, 3)
+        );
+
+        assertEquals(PieceType.PAWN, board.getSquare(3, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(3, 4).getColor());
+        assertEquals(PieceType.PAWN, board.getSquare(3, 3).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(3, 3).getColor());
+        assertEquals(PieceType.KNIGHT, board.getSquare(2, 3).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(2, 3).getColor());
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
