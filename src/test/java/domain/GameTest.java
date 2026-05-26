@@ -1356,6 +1356,21 @@ public class GameTest {
         assertTrue(game.isKingInCheck(PieceColor.BLACK));
     }
 
+    @Test
+    public void IsKingInCheck_WhiteKingMissing_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(7, 4, null);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> game.isKingInCheck(PieceColor.WHITE)
+        );
+    }
+
     private void assertPiece(
             Board board,
             int row,
