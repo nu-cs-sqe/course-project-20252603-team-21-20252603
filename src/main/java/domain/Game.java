@@ -30,7 +30,8 @@ public class Game {
     public boolean isKingInCheck(PieceColor color) {
         int[] kingPosition = findKingPosition(color);
 
-        return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1]);
+        return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1])
+                || isAttackedByBishopOrQueen(color, kingPosition[0], kingPosition[1]);
     }
 
     private int[] findKingPosition(PieceColor color) {
@@ -60,6 +61,13 @@ public class Game {
                 || hasRookOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 0, 1);
     }
 
+    private boolean isAttackedByBishopOrQueen(PieceColor kingColor, int kingRow, int kingCol) {
+        return hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, -1, -1)
+                || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, -1, 1)
+                || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 1, -1)
+                || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 1, 1);
+    }
+
     private boolean hasRookOrQueenAttackFromDirection(
             PieceColor kingColor,
             int kingRow,
@@ -76,6 +84,32 @@ public class Game {
             if (piece != null) {
                 return piece.getColor() != kingColor
                         && (piece.getType() == PieceType.ROOK
+                        || piece.getType() == PieceType.QUEEN);
+            }
+
+            row += rowStep;
+            col += colStep;
+        }
+
+        return false;
+    }
+
+    private boolean hasBishopOrQueenAttackFromDirection(
+            PieceColor kingColor,
+            int kingRow,
+            int kingCol,
+            int rowStep,
+            int colStep
+    ) {
+        int row = kingRow + rowStep;
+        int col = kingCol + colStep;
+
+        while (row >= 0 && row < board.getSize() && col >= 0 && col < board.getSize()) {
+            Piece piece = board.getSquare(row, col);
+
+            if (piece != null) {
+                return piece.getColor() != kingColor
+                        && (piece.getType() == PieceType.BISHOP
                         || piece.getType() == PieceType.QUEEN);
             }
 
