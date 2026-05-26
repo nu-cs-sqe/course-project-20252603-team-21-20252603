@@ -2779,6 +2779,46 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnCannotEnPassantAfterWindowExpires_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(3, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+        board.setSquare(1, 3, new Piece(PieceType.PAWN, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 3);
+
+        game.movePiece(1, 3, 3, 3);
+
+        game.movePiece(7, 3, 7, 4);
+
+        game.movePiece(0, 4, 0, 3);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(3, 4, 2, 3)
+        );
+
+        assertEquals(PieceType.PAWN, board.getSquare(3, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(3, 4).getColor());
+        assertEquals(PieceType.PAWN, board.getSquare(3, 3).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(3, 3).getColor());
+        assertTrue(board.isEmpty(2, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
