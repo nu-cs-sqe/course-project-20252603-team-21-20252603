@@ -31,7 +31,8 @@ public class Game {
         int[] kingPosition = findKingPosition(color);
 
         return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1])
-                || isAttackedByBishopOrQueen(color, kingPosition[0], kingPosition[1]);
+                || isAttackedByBishopOrQueen(color, kingPosition[0], kingPosition[1])
+                || isAttackedByKnight(color, kingPosition[0], kingPosition[1]);
     }
 
     private int[] findKingPosition(PieceColor color) {
@@ -66,6 +67,17 @@ public class Game {
                 || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, -1, 1)
                 || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 1, -1)
                 || hasBishopOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 1, 1);
+    }
+
+    private boolean isAttackedByKnight(PieceColor kingColor, int kingRow, int kingCol) {
+        return isEnemyKnightAt(kingColor, kingRow - 2, kingCol - 1)
+                || isEnemyKnightAt(kingColor, kingRow - 2, kingCol + 1)
+                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol - 2)
+                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol + 2)
+                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol - 2)
+                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol + 2)
+                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol - 1)
+                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol + 1);
     }
 
     private boolean hasRookOrQueenAttackFromDirection(
@@ -118,6 +130,22 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean isEnemyKnightAt(PieceColor kingColor, int row, int col) {
+        if (isOutsideBoard(row, col)) {
+            return false;
+        }
+
+        Piece piece = board.getSquare(row, col);
+
+        return piece != null
+                && piece.getColor() != kingColor
+                && piece.getType() == PieceType.KNIGHT;
+    }
+
+    private boolean isOutsideBoard(int row, int col) {
+        return row < 0 || row >= board.getSize() || col < 0 || col >= board.getSize();
     }
 
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
