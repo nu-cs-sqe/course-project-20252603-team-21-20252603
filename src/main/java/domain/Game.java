@@ -250,11 +250,13 @@ public class Game {
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
-        if (currentTurn == PieceColor.WHITE) {
-            currentTurn = PieceColor.BLACK;
-        } else {
-            currentTurn = PieceColor.WHITE;
+        if (isKingInCheck(piece.getColor())) {
+            board.setSquare(startRow, startCol, piece);
+            board.setSquare(endRow, endCol, destinationPiece);
+            throw new IllegalArgumentException("Move leaves king in check.");
         }
+
+        switchTurn();
     }
 
     private void validateBounds(int row, int col) {
