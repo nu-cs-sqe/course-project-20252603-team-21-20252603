@@ -5,7 +5,7 @@
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
 | TC1 | `isKingInCheck(WHITE)` | White king is not attacked by any opposing piece | Returns `false` | ✅ |
-| TC2 | `isKingInCheck(WHITE)` | White king attacked horizontally/vertically by black rook or queen | Returns `true` | :x: |
+| TC2 | `isKingInCheck(WHITE)` | White king attacked horizontally/vertically by black rook or queen | Returns `true` | ✅ |
 | TC3 | `isKingInCheck(WHITE)` | White king attacked diagonally by black bishop or queen | Returns `true` | :x: |
 | TC4 | `isKingInCheck(WHITE)` | White king attacked by black knight in valid L-shape position | Returns `true` | :x: |
 | TC5 | `isKingInCheck(WHITE)` | White king attacked by black pawn from valid attack square | Returns `true` | :x: |
