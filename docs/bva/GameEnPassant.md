@@ -10,7 +10,7 @@ BVA basis:
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
 | TC1 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn on e5 captures en passant on d6 immediately after black pawn moves from d7 to d5 | Move succeeds; white pawn moves to d6; black pawn removed from d5; e5 empty; turn switches to BLACK | ✅ |
-| TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | Black pawn on d4 captures en passant on e3 immediately after white pawn moves from e2 to e4 | Move succeeds; black pawn moves to e3; white pawn removed from e4; d4 empty; turn switches to WHITE | :x: |
+| TC2 | `movePiece`, `getBoard`, `getCurrentTurn` | Black pawn on d4 captures en passant on e3 immediately after white pawn moves from e2 to e4 | Move succeeds; black pawn moves to e3; white pawn removed from e4; d4 empty; turn switches to WHITE | ✅ |
 | TC3 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn on e5 attempts en passant on d6, but black pawn moved only one square from d6 to d5 | Move rejected; white pawn remains e5; black pawn remains d5; d6 empty; turn remains WHITE | :x: |
 | TC4 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn on e5 attempts en passant on d6, but the previous move was by a black knight instead of the adjacent black pawn | Move rejected; white pawn remains e5; black pawn remains d5; d6 empty; turn remains WHITE | :x: |
 | TC5 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn on e5 attempts en passant on d6 one full turn after black pawn moved from d7 to d5 | Move rejected; en passant window expired; white pawn remains e5; black pawn remains d5; d6 empty; turn remains WHITE | :x: |
