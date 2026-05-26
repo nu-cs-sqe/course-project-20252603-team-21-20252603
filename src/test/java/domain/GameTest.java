@@ -1834,6 +1834,32 @@ public class GameTest {
         assertFalse(game.isCheckmate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsCheckmate_WhiteRookCanCaptureCheckingRook_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteRook = board.getSquare(7, 7);
+
+        board.setSquare(6, 4, null);
+        board.setSquare(5, 4, null);
+        board.setSquare(4, 4, null);
+        board.setSquare(3, 4, null);
+        board.setSquare(2, 4, null);
+        board.setSquare(1, 4, null);
+
+        board.setSquare(0, 4, new Piece(PieceType.ROOK, PieceColor.BLACK));
+
+        board.setSquare(0, 7, whiteRook);
+        board.setSquare(7, 7, null);
+        board.setSquare(0, 5, null);
+        board.setSquare(0, 6, null);
+
+        assertFalse(game.isCheckmate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
