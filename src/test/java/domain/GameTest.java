@@ -2346,6 +2346,33 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BlackPawnPromotesToQueen_ReturnsQueenOnFinalRank() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+        board.setSquare(6, 0, new Piece(PieceType.PAWN, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 3);
+
+        game.movePiece(6, 0, 7, 0);
+
+        assertTrue(board.isEmpty(6, 0));
+        assertEquals(PieceType.QUEEN, board.getSquare(7, 0).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(7, 0).getColor());
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
