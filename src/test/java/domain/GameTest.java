@@ -1371,6 +1371,28 @@ public class GameTest {
         );
     }
 
+    // Self Check Detection
+
+    @Test
+    public void MovePiece_RookMovesWithoutExposingWhiteKingToCheck_MoveSucceeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(6, 0, null);
+
+        game.movePiece(7, 0, 6, 0);
+
+        assertTrue(board.isEmpty(7, 0));
+        assertEquals(whiteRook, board.getSquare(6, 0));
+        assertEquals(PieceType.ROOK, board.getSquare(6, 0).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(6, 0).getColor());
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
     private void assertPiece(
             Board board,
             int row,
