@@ -3058,6 +3058,40 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnNormalDiagonalCaptureAfterTwoSquareMoveElsewhere_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(3, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+        board.setSquare(2, 5, new Piece(PieceType.ROOK, PieceColor.BLACK));
+        board.setSquare(1, 0, new Piece(PieceType.PAWN, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 3);
+
+        game.movePiece(1, 0, 3, 0);
+
+        game.movePiece(3, 4, 2, 5);
+
+        assertTrue(board.isEmpty(3, 4));
+        assertEquals(PieceType.PAWN, board.getSquare(2, 5).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(2, 5).getColor());
+        assertEquals(PieceType.PAWN, board.getSquare(3, 0).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(3, 0).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
