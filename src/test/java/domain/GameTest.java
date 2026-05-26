@@ -1922,6 +1922,33 @@ public class GameTest {
         assertFalse(game.isCheckmate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsCheckmate_WhiteKingTrappedByProtectedKnight_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 0, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(5, 5, new Piece(PieceType.KNIGHT, PieceColor.BLACK));
+        board.setSquare(3, 7, new Piece(PieceType.BISHOP, PieceColor.BLACK));
+        board.setSquare(0, 3, new Piece(PieceType.ROOK, PieceColor.BLACK));
+        board.setSquare(0, 5, new Piece(PieceType.ROOK, PieceColor.BLACK));
+        board.setSquare(4, 4, new Piece(PieceType.ROOK, PieceColor.BLACK));
+        board.setSquare(4, 7, new Piece(PieceType.BISHOP, PieceColor.BLACK));
+        board.setSquare(5, 7, new Piece(PieceType.BISHOP, PieceColor.BLACK));
+
+        assertTrue(game.isCheckmate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
