@@ -2610,6 +2610,39 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnPromotionExposesKingToCheck_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        Piece whiteKing = new Piece(PieceType.KING, PieceColor.WHITE);
+        Piece whitePawn = new Piece(PieceType.PAWN, PieceColor.WHITE);
+
+        board.setSquare(2, 7, whiteKing);
+        board.setSquare(1, 6, whitePawn);
+        board.setSquare(0, 5, new Piece(PieceType.BISHOP, PieceColor.BLACK));
+        board.setSquare(0, 0, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(1, 6, 0, 6)
+        );
+
+        assertEquals(whiteKing, board.getSquare(2, 7));
+        assertEquals(whitePawn, board.getSquare(1, 6));
+        assertTrue(board.isEmpty(0, 6));
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
