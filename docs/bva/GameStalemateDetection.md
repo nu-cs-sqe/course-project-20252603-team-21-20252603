@@ -10,7 +10,7 @@ BVA basis:
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
 | TC1 | `isStalemate(WHITE)` | White king on e1 is not in check and white has at least one legal move | Returns `false` | ✅ |
-| TC2 | `isStalemate(WHITE)` | White king on h1 is not in check, but all legal king moves are attacked and white has no other pieces | Returns `true` | :x: |
+| TC2 | `isStalemate(WHITE)` | White king on h1 is not in check, but all legal king moves are attacked and white has no other pieces | Returns `true` | ✅ |
 | TC3 | `isStalemate(WHITE)` | White king on h1 is not in check and has one legal escape square | Returns `false` | :x: |
 | TC4 | `isStalemate(WHITE)` | White king has no legal moves, but white rook has a legal move | Returns `false` | :x: |
 | TC5 | `isStalemate(WHITE)` | White king has no legal moves, but white bishop can legally move without exposing the king to check | Returns `false` | :x: |
