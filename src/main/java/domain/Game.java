@@ -33,7 +33,8 @@ public class Game {
         return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1])
                 || isAttackedByBishopOrQueen(color, kingPosition[0], kingPosition[1])
                 || isAttackedByKnight(color, kingPosition[0], kingPosition[1])
-                || isAttackedByPawn(color, kingPosition[0], kingPosition[1]);
+                || isAttackedByPawn(color, kingPosition[0], kingPosition[1])
+                || isAttackedByKing(color, kingPosition[0], kingPosition[1]);
     }
 
     private int[] findKingPosition(PieceColor color) {
@@ -46,6 +47,32 @@ public class Game {
         }
 
         throw new IllegalStateException("King not found.");
+    }
+
+    private boolean isAttackedByKing(PieceColor kingColor, int kingRow, int kingCol) {
+        for (int rowOffset = -1; rowOffset <= 1; rowOffset++) {
+            for (int colOffset = -1; colOffset <= 1; colOffset++) {
+                if (rowOffset != 0 || colOffset != 0) {
+                    if (isEnemyKingAt(kingColor, kingRow + rowOffset, kingCol + colOffset)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isEnemyKingAt(PieceColor kingColor, int row, int col) {
+        if (isOutsideBoard(row, col)) {
+            return false;
+        }
+
+        Piece piece = board.getSquare(row, col);
+
+        return piece != null
+                && piece.getColor() != kingColor
+                && piece.getType() == PieceType.KING;
     }
 
     private boolean isKingOfColor(int row, int col, PieceColor color) {
