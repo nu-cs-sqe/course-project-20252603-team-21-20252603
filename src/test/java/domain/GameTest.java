@@ -1096,6 +1096,25 @@ public class GameTest {
         assertFalse(game.isKingInCheck(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsKingInCheck_WhiteKingAttackedByBlackRook_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(6, 4, null);
+        board.setSquare(1, 4, null);
+
+        board.setSquare(
+                0,
+                4,
+                new Piece(PieceType.ROOK, PieceColor.BLACK)
+        );
+
+        assertTrue(game.isKingInCheck(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,

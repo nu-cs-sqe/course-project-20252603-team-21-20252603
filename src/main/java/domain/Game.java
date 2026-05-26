@@ -28,6 +28,61 @@ public class Game {
     }
 
     public boolean isKingInCheck(PieceColor color) {
+        int[] kingPosition = findKingPosition(color);
+
+        return isAttackedByRookOrQueen(color, kingPosition[0], kingPosition[1]);
+    }
+
+    private int[] findKingPosition(PieceColor color) {
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                if (isKingOfColor(row, col, color)) {
+                    return new int[] {row, col};
+                }
+            }
+        }
+
+        throw new IllegalStateException("King not found.");
+    }
+
+    private boolean isKingOfColor(int row, int col, PieceColor color) {
+        Piece piece = board.getSquare(row, col);
+
+        return piece != null
+                && piece.getType() == PieceType.KING
+                && piece.getColor() == color;
+    }
+
+    private boolean isAttackedByRookOrQueen(PieceColor kingColor, int kingRow, int kingCol) {
+        return hasRookOrQueenAttackFromDirection(kingColor, kingRow, kingCol, -1, 0)
+                || hasRookOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 1, 0)
+                || hasRookOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 0, -1)
+                || hasRookOrQueenAttackFromDirection(kingColor, kingRow, kingCol, 0, 1);
+    }
+
+    private boolean hasRookOrQueenAttackFromDirection(
+            PieceColor kingColor,
+            int kingRow,
+            int kingCol,
+            int rowStep,
+            int colStep
+    ) {
+        int row = kingRow + rowStep;
+        int col = kingCol + colStep;
+
+        while (row >= 0 && row < board.getSize() && col >= 0 && col < board.getSize()) {
+            Piece piece = board.getSquare(row, col);
+
+            if (piece != null) {
+                return piece.getColor() != kingColor
+                        && (piece.getType() == PieceType.ROOK
+                        || piece.getType() == PieceType.QUEEN);
+            }
+
+            row += rowStep;
+            col += colStep;
+        }
+
         return false;
     }
 
