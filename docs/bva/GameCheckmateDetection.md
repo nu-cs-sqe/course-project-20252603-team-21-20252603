@@ -9,7 +9,7 @@ BVA basis:
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC1 | `isCheckmate(WHITE)` | White king on e1 is not in check and white has legal moves available | Returns `false` | :x: |
+| TC1 | `isCheckmate(WHITE)` | White king on e1 is not in check and white has legal moves available | Returns `false` | ✅ |
 | TC2 | `isCheckmate(WHITE)` | White king on e1 is in check from black rook on e8, but white king can legally move to d1 | Returns `false` | :x: |
 | TC3 | `isCheckmate(WHITE)` | White king on e1 is in check from black rook on e8, but white bishop can move to e2 to block the check | Returns `false` | :x: |
 | TC4 | `isCheckmate(WHITE)` | White king on e1 is in check from black rook on e8, but white rook can capture the checking rook on e8 | Returns `false` | :x: |
