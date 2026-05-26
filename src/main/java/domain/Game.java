@@ -9,8 +9,11 @@ public class Game {
     private PieceColor currentTurn;
 
     private int enPassantCapturedPawnRow = -1;
+
     private int enPassantCapturedPawnCol = -1;
+
     private int enPassantDestinationRow = -1;
+
     private int enPassantDestinationCol = -1;
 
     public void initializeGame() {
