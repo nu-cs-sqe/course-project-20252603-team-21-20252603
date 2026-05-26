@@ -27,6 +27,10 @@ public class Game {
         return currentTurn;
     }
 
+    public boolean isKingInCheck(PieceColor color) {
+        return false;
+    }
+
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
         validateBounds(startRow, startCol);
         validateBounds(endRow, endCol);

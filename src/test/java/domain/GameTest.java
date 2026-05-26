@@ -1069,6 +1069,33 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    // Check Detection
+    @Test
+    public void IsKingInCheck_WhiteKingNotAttacked_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        board.setSquare(0, 0, null);
+        board.setSquare(0, 1, null);
+        board.setSquare(0, 2, null);
+        board.setSquare(0, 3, null);
+        board.setSquare(0, 4, null);
+        board.setSquare(0, 5, null);
+        board.setSquare(0, 6, null);
+        board.setSquare(0, 7, null);
+        board.setSquare(1, 0, null);
+        board.setSquare(1, 1, null);
+        board.setSquare(1, 2, null);
+        board.setSquare(1, 3, null);
+        board.setSquare(1, 4, null);
+        board.setSquare(1, 5, null);
+        board.setSquare(1, 6, null);
+        board.setSquare(1, 7, null);
+
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
