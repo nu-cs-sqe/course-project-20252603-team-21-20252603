@@ -27,6 +27,10 @@ public class Game {
         return currentTurn;
     }
 
+    public boolean isStalemate(PieceColor color) {
+        return false;
+    }
+
     public boolean isCheckmate(PieceColor color) {
         return isKingInCheck(color) && !hasAnyLegalMove(color);
     }

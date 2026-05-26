@@ -2060,6 +2060,15 @@ public class GameTest {
         );
     }
 
+    // Stalemate Detection
+    @Test
+    public void IsStalemate_WhiteKingNotInCheckAndHasLegalMove_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        assertFalse(game.isStalemate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
