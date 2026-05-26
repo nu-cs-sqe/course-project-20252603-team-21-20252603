@@ -2251,6 +2251,27 @@ public class GameTest {
         assertFalse(game.isStalemate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsStalemate_BlackKingHasNoLegalMoves_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(0, 7, new Piece(PieceType.KING, PieceColor.BLACK));
+        board.setSquare(7, 0, new Piece(PieceType.KING, PieceColor.WHITE));
+
+        board.setSquare(2, 6, new Piece(PieceType.QUEEN, PieceColor.WHITE));
+
+        assertTrue(game.isStalemate(PieceColor.BLACK));
+    }
+
     private void assertPiece(
             Board board,
             int row,
