@@ -2272,6 +2272,14 @@ public class GameTest {
         assertTrue(game.isStalemate(PieceColor.BLACK));
     }
 
+    @Test
+    public void IsStalemate_BlackKingNotInCheckAndHasLegalMove_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        assertFalse(game.isStalemate(PieceColor.BLACK));
+    }
+
     private void assertPiece(
             Board board,
             int row,
