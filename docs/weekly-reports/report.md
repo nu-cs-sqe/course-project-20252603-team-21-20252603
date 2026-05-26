@@ -25,6 +25,32 @@ Finishing from Week 4:
 2. [50% done] Ryan Lei: Start working on Piece, did BVA basic, began working on test cases and set up enums, piece class, and test class
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
 
+# Week 6 (05/04/26-05/10/2026)
+**Planning and Progress Tracking**:
+1. [done] Sid Javeri: Completed Piece implementation using TDD and BVA, implemented constructor validation, getters, and enums
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
+
+
+# Week 7 (05/11/2026-05/17/2026)
+**Planning and Progress Tracking**:
+1. [done] Ryan Lei, Sid Javeri: Finished Piece Implementation with TDD, all cases for Piece BVA done
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/13
+2. [done] Ryan Lei, Sid Javeri: Finished Game Initialization + BVA, all tests for BVA done
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/24
+3. [done] Ryan Lei: Finished User story on Piece Movement logic, with all unique piece movements accounted for
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+
+# Week 8 (05/18/2026-05/24/2026)
+**Planning and Progress Tracking**:
+1. [done] Sid Javeri: Completed full castling implementation in `movePiece(...)` using TDD + BVA, including kingside and queenside castling for both white and black, comprehensive validation coverage for blocked paths, missing/opponent rooks, occupied destination squares, invalid castling-like king moves, and non-king moves incorrectly triggering castling, while also refactoring castling logic into helper methods to improve readability and keep `movePiece(...)` orchestration-focused
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+2. [done] Sid Javeri: Replaced Board magic numbers with named constants for improved readability and maintainability
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/29
+3. [done] Sid Javeri: Added BVA documentation for Game move orchestration and castling validation scenarios
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/30
+4. [done] Sid Javeri: Added and verified additional Checkstyle formatting rules and validated project with `./gradlew clean check`
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/31
+5. [in progress] Sid Javeri: Designing BVA and TDD plan for king check validation and self-check move rejection
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
