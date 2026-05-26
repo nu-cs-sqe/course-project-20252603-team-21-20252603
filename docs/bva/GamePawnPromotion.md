@@ -15,7 +15,7 @@ BVA basis:
 | TC4 | `movePiece`, `getBoard`, `getCurrentTurn` | Black pawn moves from h2 to h1 with empty destination and promotes to bishop on BLACK turn | Move succeeds; h1 contains BLACK bishop; h2 empty; turn switches to WHITE | ✅ |
 | TC5 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn moves diagonally from g7 to h8, captures black rook, and promotes to knight | Move succeeds; h8 contains WHITE knight; black rook removed; g7 empty; turn switches to BLACK | ✅ |
 | TC6 | `movePiece`, `getBoard`, `getCurrentTurn` | Black pawn moves diagonally from b2 to a1, captures white rook, and promotes to rook on BLACK turn | Move succeeds; a1 contains BLACK rook; white rook removed; b2 empty; turn switches to WHITE | ✅ |
-| TC7 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn moves from a6 to a7, not reaching final rank | Move succeeds; pawn remains WHITE pawn on a7; no promotion occurs; turn switches to BLACK | :x: |
+| TC7 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn moves from a6 to a7, not reaching final rank | Move succeeds; pawn remains WHITE pawn on a7; no promotion occurs; turn switches to BLACK | ✅ |
 | TC8 | `movePiece`, `getBoard`, `getCurrentTurn` | Black pawn moves from a3 to a2 on BLACK turn, not reaching final rank | Move succeeds; pawn remains BLACK pawn on a2; no promotion occurs; turn switches to WHITE | :x: |
 | TC9 | `movePiece`, `getBoard`, `getCurrentTurn` | White non-pawn piece moves to final rank | Move succeeds normally; piece type does not change; turn switches to BLACK | :x: |
 | TC10 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn attempts to promote to KING | Move rejected; pawn remains in place; destination unchanged; turn remains WHITE | :x: |
