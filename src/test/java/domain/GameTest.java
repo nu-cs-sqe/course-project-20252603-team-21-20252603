@@ -2134,6 +2134,29 @@ public class GameTest {
         assertFalse(game.isStalemate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsStalemate_WhiteKingHasNoLegalMovesButBishopCanMove_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 7, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(7, 0, new Piece(PieceType.BISHOP, PieceColor.WHITE));
+
+        board.setSquare(0, 0, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(5, 6, new Piece(PieceType.QUEEN, PieceColor.BLACK));
+
+        assertFalse(game.isStalemate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
