@@ -1228,6 +1228,22 @@ public class GameTest {
         assertTrue(game.isKingInCheck(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsKingInCheck_WhiteKingNotAttackedByBlackPawnDirectlyInFront_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(
+                6,
+                4,
+                new Piece(PieceType.PAWN, PieceColor.BLACK)
+        );
+
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
