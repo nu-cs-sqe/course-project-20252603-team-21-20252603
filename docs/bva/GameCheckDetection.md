@@ -4,13 +4,18 @@
 
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
-| TC1 | `isKingInCheck(WHITE)` | White king is not attacked by any opposing piece | Returns `false` | ✅ |
-| TC2 | `isKingInCheck(WHITE)` | White king attacked horizontally/vertically by black rook or queen | Returns `true` | ✅ |
-| TC3 | `isKingInCheck(WHITE)` | White king attacked diagonally by black bishop or queen | Returns `true` | :x: |
-| TC4 | `isKingInCheck(WHITE)` | White king attacked by black knight in valid L-shape position | Returns `true` | :x: |
-| TC5 | `isKingInCheck(WHITE)` | White king attacked by black pawn from valid attack square | Returns `true` | :x: |
-| TC6 | `isKingInCheck(WHITE)` | White king adjacent to opposing king | Returns `true` | :x: |
-| TC7 | `isKingInCheck(WHITE)` | Sliding attack path exists geometrically but is blocked by another piece | Returns `false` | :x: |
-| TC8 | `isKingInCheck(WHITE)` | Friendly white piece aligned with king does not count as attack | Returns `false` | :x: |
-| TC9 | `isKingInCheck(BLACK)` | Black king attacked by white piece | Returns `true` | :x: |
-| TC10 | `isKingInCheck(PieceColor color)` | King of specified color does not exist on board | Throws exception or returns `false` based on design decision | :x: |
+| TC1 | `isKingInCheck(WHITE)` | White king on e1; no black pieces attack the white king | Returns `false` | ✅ |
+| TC2 | `isKingInCheck(WHITE)` | White king on e1; black rook on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ✅ |
+| TC3 | `isKingInCheck(WHITE)` | White king on e1; black bishop on b4; diagonal path d2/c3 clear | Returns `true` | ❌ |
+| TC4 | `isKingInCheck(WHITE)` | White king on e1; black queen on h4; diagonal path f2/g3 clear | Returns `true` | ❌ |
+| TC5 | `isKingInCheck(WHITE)` | White king on e1; black queen on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ❌ |
+| TC6 | `isKingInCheck(WHITE)` | White king on e1; black knight on f3 | Returns `true` | ❌ |
+| TC7 | `isKingInCheck(WHITE)` | White king on e1; black knight on f2, which is not a valid knight attack square | Returns `false` | ❌ |
+| TC8 | `isKingInCheck(WHITE)` | White king on e1; black pawn on d2 | Returns `true` | ❌ |
+| TC9 | `isKingInCheck(WHITE)` | White king on e1; black pawn on e2 directly in front of king but not attacking diagonally | Returns `false` | ❌ |
+| TC10 | `isKingInCheck(WHITE)` | White king on e1; black king on e2 adjacent to white king | Returns `true` | ❌ |
+| TC11 | `isKingInCheck(WHITE)` | White king on e1; black king on e3, not adjacent to white king | Returns `false` | ❌ |
+| TC12 | `isKingInCheck(WHITE)` | White king on e1; black rook on e8; white piece on e4 blocks the path | Returns `false` | ❌ |
+| TC13 | `isKingInCheck(WHITE)` | White king on e1; white rook on e8 aligned with king | Returns `false` | ❌ |
+| TC14 | `isKingInCheck(BLACK)` | Black king on e8; white rook on e1; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ❌ |
+| TC15 | `isKingInCheck(WHITE)` | No white king exists on the board | Throws `IllegalStateException` | ❌ |
