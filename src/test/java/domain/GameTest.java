@@ -1737,6 +1737,40 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_PinnedRookCapturesCheckingRook_MoveSucceeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+        Piece blackRook = new Piece(PieceType.ROOK, PieceColor.BLACK);
+
+        board.setSquare(6, 4, whiteRook);
+        board.setSquare(7, 0, null);
+
+        board.setSquare(5, 4, null);
+        board.setSquare(4, 4, null);
+        board.setSquare(3, 4, null);
+        board.setSquare(2, 4, null);
+        board.setSquare(1, 4, null);
+
+        board.setSquare(0, 4, blackRook);
+
+        game.movePiece(6, 4, 0, 4);
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertTrue(board.isEmpty(6, 4));
+        assertEquals(whiteRook, board.getSquare(0, 4));
+        assertNotEquals(blackRook, board.getSquare(0, 4));
+        assertEquals(PieceType.ROOK, board.getSquare(0, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(0, 4).getColor());
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
