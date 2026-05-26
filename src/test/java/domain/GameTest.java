@@ -1805,6 +1805,35 @@ public class GameTest {
         assertFalse(game.isCheckmate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsCheckmate_WhiteBishopCanBlockRookCheck_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(6, 4, null);
+        board.setSquare(5, 4, null);
+        board.setSquare(4, 4, null);
+        board.setSquare(3, 4, null);
+        board.setSquare(2, 4, null);
+        board.setSquare(1, 4, null);
+
+        board.setSquare(
+                7,
+                3,
+                new Piece(PieceType.BISHOP, PieceColor.WHITE)
+        );
+
+        board.setSquare(
+                0,
+                4,
+                new Piece(PieceType.ROOK, PieceColor.BLACK)
+        );
+
+        assertFalse(game.isCheckmate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
