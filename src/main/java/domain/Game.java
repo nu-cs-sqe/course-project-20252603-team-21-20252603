@@ -27,6 +27,10 @@ public class Game {
         return currentTurn;
     }
 
+    public boolean isCheckmate(PieceColor color) {
+        return false;
+    }
+
     public boolean isKingInCheck(PieceColor color) {
         int[] kingPosition = findKingPosition(color);
 

@@ -1771,6 +1771,15 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    // Checkmate Detection
+    @Test
+    public void IsCheckmate_WhiteKingNotInCheck_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        assertFalse(game.isCheckmate(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
