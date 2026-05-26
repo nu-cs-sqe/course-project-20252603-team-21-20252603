@@ -312,7 +312,22 @@ public class Game {
             throw new IllegalArgumentException("Move leaves king in check.");
         }
 
+        promotePawnIfNeeded(piece, endRow, endCol);
+
         switchTurn();
+    }
+
+    private void promotePawnIfNeeded(Piece piece, int endRow, int endCol) {
+        if (piece.getType() != PieceType.PAWN) {
+            return;
+        }
+
+        boolean whiteReachedFinalRank = piece.getColor() == PieceColor.WHITE && endRow == 0;
+        boolean blackReachedFinalRank = piece.getColor() == PieceColor.BLACK && endRow == board.getSize() - 1;
+
+        if (whiteReachedFinalRank || blackReachedFinalRank) {
+            board.setSquare(endRow, endCol, new Piece(PieceType.QUEEN, piece.getColor()));
+        }
     }
 
     private void validateBounds(int row, int col) {
