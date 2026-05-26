@@ -2001,6 +2001,28 @@ public class GameTest {
         assertTrue(game.isCheckmate(PieceColor.WHITE));
     }
 
+    @Test
+    public void IsCheckmate_BlackBishopCanBlockRookCheck_ReturnsFalse() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+        board.setSquare(7, 0, new Piece(PieceType.KING, PieceColor.WHITE));
+
+        board.setSquare(7, 4, new Piece(PieceType.ROOK, PieceColor.WHITE));
+        board.setSquare(0, 3, new Piece(PieceType.BISHOP, PieceColor.BLACK));
+
+        assertFalse(game.isCheckmate(PieceColor.BLACK));
+    }
+
     private void assertPiece(
             Board board,
             int row,
