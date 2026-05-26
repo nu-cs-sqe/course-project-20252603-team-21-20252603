@@ -15,7 +15,7 @@ BVA basis:
 | TC4 | `isStalemate(WHITE)` | White king has no legal moves, but white rook has a legal move | Returns `false` | ✅ |
 | TC5 | `isStalemate(WHITE)` | White king has no legal moves, but white bishop can legally move without exposing the king to check | Returns `false` | ✅ |
 | TC6 | `isStalemate(WHITE)` | White king has no legal moves and a white pinned bishop has apparent movement, but every bishop move would expose the king to check | Returns `true` | ✅ |
-| TC7 | `isStalemate(WHITE)` | White king has no legal moves, but white pawn has a legal forward move | Returns `false` | :x: |
+| TC7 | `isStalemate(WHITE)` | White king has no legal moves, but white pawn has a legal forward move | Returns `false` | ✅ |
 | TC8 | `isStalemate(WHITE)` | White king has no legal moves and white pawn is blocked, leaving no legal moves | Returns `true` | :x: |
 | TC9 | `isStalemate(WHITE)` | White king has no legal moves but is currently in check | Returns `false` | :x: |
 | TC10 | `isStalemate(BLACK)` | Black king on h8 is not in check, but all legal king moves are attacked and black has no other pieces | Returns `true` | :x: |
