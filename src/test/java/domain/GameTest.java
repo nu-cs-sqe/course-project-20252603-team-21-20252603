@@ -1627,6 +1627,37 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BishopMoveDoesNotResolveKnightCheck_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteBishop = board.getSquare(7, 2);
+
+        board.setSquare(
+                5,
+                5,
+                new Piece(PieceType.KNIGHT, PieceColor.BLACK)
+        );
+
+        board.setSquare(6, 3, null);
+        board.setSquare(6, 4, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 2, 6, 3)
+        );
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(whiteBishop, board.getSquare(7, 2));
+        assertTrue(board.isEmpty(6, 3));
+        assertTrue(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
