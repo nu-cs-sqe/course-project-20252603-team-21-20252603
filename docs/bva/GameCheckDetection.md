@@ -17,5 +17,5 @@
 | TC11 | `isKingInCheck(WHITE)` | White king on e1; black king on e3, not adjacent to white king | Returns `false` | ✅ |
 | TC12 | `isKingInCheck(WHITE)` | White king on e1; black rook on e8; white piece on e4 blocks the path | Returns `false` | ✅ |
 | TC13 | `isKingInCheck(WHITE)` | White king on e1; white rook on e8 aligned with king | Returns `false` | ✅ |
-| TC14 | `isKingInCheck(BLACK)` | Black king on e8; white rook on e1; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ❌ |
+| TC14 | `isKingInCheck(BLACK)` | Black king on e8; white rook on e1; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ✅ |
 | TC15 | `isKingInCheck(WHITE)` | No white king exists on the board | Throws `IllegalStateException` | ❌ |
