@@ -28,7 +28,55 @@ public class Game {
     }
 
     public boolean isCheckmate(PieceColor color) {
+        return isKingInCheck(color) && !hasAnyLegalMove(color);
+    }
+
+    private boolean hasAnyLegalMove(PieceColor color) {
+        for (int startRow = 0; startRow < board.getSize(); startRow++) {
+            for (int startCol = 0; startCol < board.getSize(); startCol++) {
+                if (hasLegalMoveFromSquare(color, startRow, startCol)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
+    }
+
+    private boolean hasLegalMoveFromSquare(PieceColor color, int startRow, int startCol) {
+        Piece piece = board.getSquare(startRow, startCol);
+
+        if (piece == null || piece.getColor() != color) {
+            return false;
+        }
+
+        for (int endRow = 0; endRow < board.getSize(); endRow++) {
+            for (int endCol = 0; endCol < board.getSize(); endCol++) {
+                if (canMoveWithoutChangingGameState(startRow, startCol, endRow, endCol)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean canMoveWithoutChangingGameState(int startRow, int startCol, int endRow, int endCol) {
+        Piece startPiece = board.getSquare(startRow, startCol);
+        Piece endPiece = board.getSquare(endRow, endCol);
+        PieceColor originalTurn = currentTurn;
+
+        try {
+            currentTurn = startPiece.getColor();
+            movePiece(startRow, startCol, endRow, endCol);
+            return true;
+        } catch (IllegalArgumentException | IndexOutOfBoundsException exception) {
+            return false;
+        } finally {
+            board.setSquare(startRow, startCol, startPiece);
+            board.setSquare(endRow, endCol, endPiece);
+            currentTurn = originalTurn;
+        }
     }
 
     public boolean isKingInCheck(PieceColor color) {
