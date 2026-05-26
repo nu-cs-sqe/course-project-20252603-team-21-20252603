@@ -1658,6 +1658,42 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BishopMoveExposesBlackKingToRookCheck_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackBishop = new Piece(PieceType.BISHOP, PieceColor.BLACK);
+        Piece whiteRook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        board.setSquare(1, 4, blackBishop);
+
+        board.setSquare(2, 4, null);
+        board.setSquare(3, 4, null);
+        board.setSquare(4, 4, null);
+        board.setSquare(5, 4, null);
+        board.setSquare(6, 4, null);
+
+        board.setSquare(7, 4, whiteRook);
+        board.setSquare(7, 0, new Piece(PieceType.KING, PieceColor.WHITE));
+
+        game.movePiece(6, 0, 5, 0);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(1, 4, 2, 3)
+        );
+
+        assertEquals(blackKing, board.getSquare(0, 4));
+        assertEquals(blackBishop, board.getSquare(1, 4));
+        assertTrue(board.isEmpty(2, 3));
+        assertFalse(game.isKingInCheck(PieceColor.BLACK));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
