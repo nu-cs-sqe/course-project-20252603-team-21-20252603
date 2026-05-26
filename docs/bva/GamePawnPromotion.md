@@ -22,3 +22,4 @@ BVA basis:
 | TC11 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn attempts to promote to PAWN | Move rejected; pawn remains in place; destination unchanged; turn remains WHITE | ✅ |
 | TC12 | `movePiece`, `getBoard`, `getCurrentTurn` | White pawn reaches final rank with no promotion type provided | Move succeeds; pawn promotes to default WHITE queen; turn switches to BLACK | ✅ |
 | TC13 | `movePiece`, `getBoard`, `getCurrentTurn`, `isKingInCheck` | White pawn promotion move would leave white king in check | Move rejected; pawn remains in place; destination unchanged; `isKingInCheck(WHITE)` remains false; turn remains WHITE | ✅ |
+
