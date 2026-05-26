@@ -2915,6 +2915,43 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnCannotEnPassantFromWrongRank_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(4, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+        board.setSquare(1, 1, new Piece(PieceType.PAWN, PieceColor.BLACK));
+        board.setSquare(4, 3, new Piece(PieceType.PAWN, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 3);
+
+        game.movePiece(1, 1, 3, 1);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(4, 4, 3, 3)
+        );
+
+        assertEquals(PieceType.PAWN, board.getSquare(4, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(4, 4).getColor());
+        assertEquals(PieceType.PAWN, board.getSquare(4, 3).getType());
+        assertEquals(PieceColor.BLACK, board.getSquare(4, 3).getColor());
+        assertTrue(board.isEmpty(3, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,

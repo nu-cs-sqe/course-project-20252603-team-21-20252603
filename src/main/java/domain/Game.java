@@ -316,7 +316,7 @@ public class Game {
             throw new IllegalArgumentException("Pawn can only move two squares from starting row.");
         }
 
-        boolean isEnPassantMove = isEnPassantMove(piece, endRow, endCol);
+        boolean isEnPassantMove = isEnPassantMove(piece, startRow, endRow, endCol);
 
         if (isPawnMovingDiagonally(piece, startCol, endCol)
                 && destinationPiece == null
@@ -355,8 +355,15 @@ public class Game {
         switchTurn();
     }
 
-    private boolean isEnPassantMove(Piece piece, int endRow, int endCol) {
-        return piece.getType() == PieceType.PAWN
+    private boolean isEnPassantMove(Piece piece, int startRow, int endRow, int endCol) {
+        if (piece.getType() != PieceType.PAWN) {
+            return false;
+        }
+
+        boolean whiteOnCorrectRank = piece.getColor() == PieceColor.WHITE && startRow == 3;
+        boolean blackOnCorrectRank = piece.getColor() == PieceColor.BLACK && startRow == 4;
+
+        return (whiteOnCorrectRank || blackOnCorrectRank)
                 && endRow == enPassantDestinationRow
                 && endCol == enPassantDestinationCol;
     }
