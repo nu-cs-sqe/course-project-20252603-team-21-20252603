@@ -271,6 +271,8 @@ public class Game {
         Piece piece = board.getSquare(startRow, startCol);
         Piece destinationPiece = board.getSquare(endRow, endCol);
 
+        validatePromotionType(piece, endRow, promotionType);
+
 
         if (piece == null) {
             throw new IllegalArgumentException("Start square is empty.");
@@ -343,6 +345,21 @@ public class Game {
 
         if (whiteReachedFinalRank || blackReachedFinalRank) {
             board.setSquare(endRow, endCol, new Piece(promotionType, piece.getColor()));
+        }
+    }
+
+    private void validatePromotionType(Piece piece, int endRow, PieceType promotionType) {
+        if (piece == null || piece.getType() != PieceType.PAWN) {
+            return;
+        }
+
+        boolean whiteReachedFinalRank = piece.getColor() == PieceColor.WHITE && endRow == 0;
+        boolean blackReachedFinalRank = piece.getColor() == PieceColor.BLACK
+                && endRow == board.getSize() - 1;
+
+        if ((whiteReachedFinalRank || blackReachedFinalRank)
+                && (promotionType == PieceType.KING || promotionType == PieceType.PAWN)) {
+            throw new IllegalArgumentException("Invalid promotion piece.");
         }
     }
 
