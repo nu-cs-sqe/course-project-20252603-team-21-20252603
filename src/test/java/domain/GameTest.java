@@ -1464,6 +1464,33 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteKingCapturesRookAndEscapesCheck_MoveSucceeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+
+        board.setSquare(6, 4,
+                new Piece(PieceType.ROOK, PieceColor.BLACK));
+
+        board.setSquare(0, 4, null);
+
+        board.setSquare(6, 3, null);
+        board.setSquare(6, 5, null);
+
+        game.movePiece(7, 4, 6, 4);
+
+        assertTrue(board.isEmpty(7, 4));
+        assertEquals(whiteKing, board.getSquare(6, 4));
+        assertEquals(PieceType.KING, board.getSquare(6, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(6, 4).getColor());
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
