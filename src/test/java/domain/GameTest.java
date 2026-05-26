@@ -1491,6 +1491,35 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteKingCapturesDefendedRook_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece blackRook = new Piece(PieceType.ROOK, PieceColor.BLACK);
+        Piece blackBishop = new Piece(PieceType.BISHOP, PieceColor.BLACK);
+
+        board.setSquare(6, 4, blackRook);
+        board.setSquare(3, 7, blackBishop);
+
+        board.setSquare(0, 4, null);
+        board.setSquare(5, 5, null);
+        board.setSquare(4, 6, null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 6, 4)
+        );
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(blackRook, board.getSquare(6, 4));
+        assertEquals(blackBishop, board.getSquare(3, 7));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
