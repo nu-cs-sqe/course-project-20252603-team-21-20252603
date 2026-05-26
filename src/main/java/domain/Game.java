@@ -28,7 +28,7 @@ public class Game {
     }
 
     public boolean isStalemate(PieceColor color) {
-        return false;
+        return !isKingInCheck(color) && !hasAnyLegalMove(color);
     }
 
     public boolean isCheckmate(PieceColor color) {
