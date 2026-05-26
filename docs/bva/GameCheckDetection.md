@@ -5,8 +5,8 @@
 | ID | Method(s) under test | System under test | Expected output | Implemented? |
 |---|---|---|---|---|
 | TC1 | `isKingInCheck(WHITE)` | White king on e1; no black pieces attack the white king | Returns `false` | ✅ |
-| TC2 | `isKingInCheck(WHITE)` | White king on e1; black rook on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | :✅: |
-| TC3 | `isKingInCheck(WHITE)` | White king on e1; black bishop on b4; diagonal path d2/c3 clear | Returns `true` | ❌ |
+| TC2 | `isKingInCheck(WHITE)` | White king on e1; black rook on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ✅ |
+| TC3 | `isKingInCheck(WHITE)` | White king on e1; black bishop on b4; diagonal path d2/c3 clear | Returns `true` | ✅ |
 | TC4 | `isKingInCheck(WHITE)` | White king on e1; black queen on h4; diagonal path f2/g3 clear | Returns `true` | ❌ |
 | TC5 | `isKingInCheck(WHITE)` | White king on e1; black queen on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ❌ |
 | TC6 | `isKingInCheck(WHITE)` | White king on e1; black knight on f3 | Returns `true` | ❌ |
