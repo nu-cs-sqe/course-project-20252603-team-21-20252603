@@ -2851,6 +2851,36 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnCannotEnPassantWhenAdjacentSquareEmpty_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(3, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(3, 4, 2, 3)
+        );
+
+        assertEquals(PieceType.PAWN, board.getSquare(3, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(3, 4).getColor());
+        assertTrue(board.isEmpty(3, 3));
+        assertTrue(board.isEmpty(2, 3));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
