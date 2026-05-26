@@ -2045,6 +2045,21 @@ public class GameTest {
         assertTrue(game.isCheckmate(PieceColor.BLACK));
     }
 
+    @Test
+    public void IsCheckmate_WhiteKingMissing_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(7, 4, null);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> game.isCheckmate(PieceColor.WHITE)
+        );
+    }
+
     private void assertPiece(
             Board board,
             int row,
