@@ -20,4 +20,4 @@ BVA basis:
 | TC9 | `isStalemate(WHITE)` | White king has no legal moves but is currently in check | Returns `false` | ✅ |
 | TC10 | `isStalemate(BLACK)` | Black king on h8 is not in check, but all legal king moves are attacked and black has no other pieces | Returns `true` | ✅ |
 | TC11 | `isStalemate(BLACK)` | Black king is not in check and black has at least one legal move | Returns `false` | ✅ |
-| TC12 | `isStalemate(WHITE)` | No white king exists on the board | Throws `IllegalStateException` | :x: |
+| TC12 | `isStalemate(WHITE)` | No white king exists on the board | Throws `IllegalStateException` | ✅ |
