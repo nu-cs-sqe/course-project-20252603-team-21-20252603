@@ -10,7 +10,7 @@
 | TC4 | `isKingInCheck(WHITE)` | White king on e1; black queen on h4; diagonal path f2/g3 clear | Returns `true` | ✅ |
 | TC5 | `isKingInCheck(WHITE)` | White king on e1; black queen on e8; e2/e3/e4/e5/e6/e7 clear | Returns `true` | ✅ |
 | TC6 | `isKingInCheck(WHITE)` | White king on e1; black knight on f3 | Returns `true` | ✅ |
-| TC7 | `isKingInCheck(WHITE)` | White king on e1; black knight on f2, which is not a valid knight attack square | Returns `false` | ❌ |
+| TC7 | `isKingInCheck(WHITE)` | White king on e1; black knight on f2, which is not a valid knight attack square | Returns `false` | ✅ |
 | TC8 | `isKingInCheck(WHITE)` | White king on e1; black pawn on d2 | Returns `true` | ❌ |
 | TC9 | `isKingInCheck(WHITE)` | White king on e1; black pawn on e2 directly in front of king but not attacking diagonally | Returns `false` | ❌ |
 | TC10 | `isKingInCheck(WHITE)` | White king on e1; black king on e2 adjacent to white king | Returns `true` | ❌ |
