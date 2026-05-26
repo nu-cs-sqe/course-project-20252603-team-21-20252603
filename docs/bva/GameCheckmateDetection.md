@@ -14,7 +14,7 @@ BVA basis:
 | TC3 | `isCheckmate(WHITE)` | White king on e1 is in check from black rook on e8, but white bishop can move to e2 to block the check | Returns `false` | ✅ |
 | TC4 | `isCheckmate(WHITE)` | White king on e1 is in check from black rook on e8, but white rook can capture the checking rook on e8 | Returns `false` | ✅ |
 | TC5 | `isCheckmate(WHITE)` | White king on e1 is in check from black queen on e2; all adjacent king moves are attacked or occupied; queen is protected; no white piece can block or capture | Returns `true` | ✅ |
-| TC6 | `isCheckmate(WHITE)` | White king on h1 is in check from black queen on g2; escape squares g1/h2 are attacked or occupied; queen is protected; no legal capture or block exists | Returns `true` | :x: |
+| TC6 | `isCheckmate(WHITE)` | White king on h1 is in check from black queen on g2; escape squares g1/h2 are attacked or occupied; queen is protected; no legal capture or block exists | Returns `true` | ✅ |
 | TC7 | `isCheckmate(WHITE)` | White king on e1 is in check from black knight on f3, but white king can capture the knight safely | Returns `false` | :x: |
 | TC8 | `isCheckmate(WHITE)` | White king on e1 is in check from black knight on f3; knight is protected; all king escape squares are attacked; knight check cannot be blocked | Returns `true` | :x: |
 | TC9 | `isCheckmate(WHITE)` | White king on e1 is in double check from black rook on e8 and black bishop on b4; white king has one legal escape square | Returns `false` | :x: |
