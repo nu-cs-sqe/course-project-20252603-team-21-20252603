@@ -2454,6 +2454,31 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhitePawnMovesWithoutPromotion_RemainsPawn() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+        board.setSquare(2, 0, new Piece(PieceType.PAWN, PieceColor.WHITE));
+
+        game.movePiece(2, 0, 1, 0);
+
+        assertTrue(board.isEmpty(2, 0));
+        assertEquals(PieceType.PAWN, board.getSquare(1, 0).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(1, 0).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
