@@ -2280,6 +2280,21 @@ public class GameTest {
         assertFalse(game.isStalemate(PieceColor.BLACK));
     }
 
+    @Test
+    public void IsStalemate_WhiteKingMissing_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(7, 4, null);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> game.isStalemate(PieceColor.WHITE)
+        );
+    }
+
     private void assertPiece(
             Board board,
             int row,
