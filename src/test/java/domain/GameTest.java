@@ -1520,6 +1520,41 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_BishopBlocksRookCheck_MoveSucceeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteBishop = board.getSquare(7, 2);
+
+        board.setSquare(6, 3, null);
+        board.setSquare(6, 4, null);
+        board.setSquare(5, 4, null);
+        board.setSquare(4, 4, null);
+        board.setSquare(3, 4, null);
+        board.setSquare(2, 4, null);
+        board.setSquare(1, 4, null);
+
+        board.setSquare(
+                0,
+                4,
+                new Piece(PieceType.ROOK, PieceColor.BLACK)
+        );
+
+        game.movePiece(7, 2, 5, 4);
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertTrue(board.isEmpty(7, 2));
+        assertEquals(whiteBishop, board.getSquare(5, 4));
+        assertEquals(PieceType.BISHOP, board.getSquare(5, 4).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(5, 4).getColor());
+        assertFalse(game.isKingInCheck(PieceColor.WHITE));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
