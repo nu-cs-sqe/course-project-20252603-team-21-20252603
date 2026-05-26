@@ -8,6 +8,11 @@ public class Game {
 
     private PieceColor currentTurn;
 
+    private int enPassantCapturedPawnRow = -1;
+    private int enPassantCapturedPawnCol = -1;
+    private int enPassantDestinationRow = -1;
+    private int enPassantDestinationCol = -1;
+
     public void initializeGame() {
         board = new Board();
         board.setupInitialPosition();
@@ -311,22 +316,71 @@ public class Game {
             throw new IllegalArgumentException("Pawn can only move two squares from starting row.");
         }
 
-        if (isPawnMovingDiagonally(piece, startCol, endCol) && destinationPiece == null) {
+        boolean isEnPassantMove = isEnPassantMove(piece, endRow, endCol);
+
+        if (isPawnMovingDiagonally(piece, startCol, endCol)
+                && destinationPiece == null
+                && !isEnPassantMove) {
             throw new IllegalArgumentException("Pawn cannot move diagonally without capturing.");
         }
 
         board.setSquare(endRow, endCol, piece);
         board.setSquare(startRow, startCol, null);
 
+        Piece enPassantCapturedPawn = null;
+        if (isEnPassantMove) {
+            enPassantCapturedPawn = board.getSquare(enPassantCapturedPawnRow, enPassantCapturedPawnCol);
+            board.setSquare(enPassantCapturedPawnRow, enPassantCapturedPawnCol, null);
+        }
+
         if (isKingInCheck(piece.getColor())) {
             board.setSquare(startRow, startCol, piece);
             board.setSquare(endRow, endCol, destinationPiece);
+
+            if (isEnPassantMove) {
+                board.setSquare(
+                        enPassantCapturedPawnRow,
+                        enPassantCapturedPawnCol,
+                        enPassantCapturedPawn
+                );
+            }
+
             throw new IllegalArgumentException("Move leaves king in check.");
         }
 
         promotePawnIfNeeded(piece, endRow, endCol, promotionType);
 
+        updateEnPassantState(piece, startRow, startCol, endRow, endCol);
+
         switchTurn();
+    }
+
+    private boolean isEnPassantMove(Piece piece, int endRow, int endCol) {
+        return piece.getType() == PieceType.PAWN
+                && endRow == enPassantDestinationRow
+                && endCol == enPassantDestinationCol;
+    }
+
+    private void updateEnPassantState(
+            Piece piece,
+            int startRow,
+            int startCol,
+            int endRow,
+            int endCol
+    ) {
+        enPassantCapturedPawnRow = -1;
+        enPassantCapturedPawnCol = -1;
+        enPassantDestinationRow = -1;
+        enPassantDestinationCol = -1;
+
+        if (!isPawnTwoSquareMove(piece, startRow, endRow, startCol, endCol)) {
+            return;
+        }
+
+        enPassantCapturedPawnRow = endRow;
+        enPassantCapturedPawnCol = endCol;
+        enPassantDestinationRow = (startRow + endRow) / 2;
+        enPassantDestinationCol = endCol;
     }
 
     private void promotePawnIfNeeded(

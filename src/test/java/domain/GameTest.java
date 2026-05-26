@@ -2643,6 +2643,39 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    // En Passant
+    @Test
+    public void MovePiece_WhitePawnCapturesEnPassant_RemovesBlackPawn() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int col = 0; col < board.getSize(); col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(7, 4, new Piece(PieceType.KING, PieceColor.WHITE));
+        board.setSquare(0, 4, new Piece(PieceType.KING, PieceColor.BLACK));
+
+        board.setSquare(3, 4, new Piece(PieceType.PAWN, PieceColor.WHITE));
+        board.setSquare(1, 3, new Piece(PieceType.PAWN, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 3);
+
+        game.movePiece(1, 3, 3, 3);
+
+        game.movePiece(3, 4, 2, 3);
+
+        assertTrue(board.isEmpty(3, 4));
+        assertTrue(board.isEmpty(3, 3));
+        assertEquals(PieceType.PAWN, board.getSquare(2, 3).getType());
+        assertEquals(PieceColor.WHITE, board.getSquare(2, 3).getColor());
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
