@@ -21,4 +21,4 @@
 | TC15 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling after king previously moved away from e1 and returned to e1 | Move rejected; king stays e1; rook stays h1; board unchanged; turn remains WHITE | ✅ |
 | TC16 | `movePiece`, `getBoard`, `getCurrentTurn` | White kingside castling after h1 rook previously moved away from h1 and returned to h1 | Move rejected; king stays e1; rook stays h1; board unchanged; turn remains WHITE | ✅ |
 | TC17 | `movePiece`, `getBoard`, `getCurrentTurn` | Black queenside castling after black king previously moved away from e8 and returned to e8 | Move rejected; king stays e8; rook stays a8; board unchanged; turn remains BLACK | ✅ |
-| TC18 | `movePiece`, `getBoard`, `getCurrentTurn` | Black queenside castling after a8 rook previously moved away from a8 and returned to a8 | Move rejected; king stays e8; rook stays a8; board unchanged; turn remains BLACK | ❌ |
+| TC18 | `movePiece`, `getBoard`, `getCurrentTurn` | Black queenside castling after a8 rook previously moved away from a8 and returned to a8 | Move rejected; king stays e8; rook stays a8; board unchanged; turn remains BLACK | ✅ |
