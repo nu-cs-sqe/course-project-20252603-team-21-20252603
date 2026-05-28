@@ -16,10 +16,28 @@ public class Game {
 
     private int enPassantDestinationCol = -1;
 
+    private boolean whiteKingHasMoved;
+
+    private boolean blackKingHasMoved;
+
+    private boolean whiteKingsideRookHasMoved;
+
+    private boolean whiteQueensideRookHasMoved;
+
+    private boolean blackKingsideRookHasMoved;
+
+    private boolean blackQueensideRookHasMoved;
+
     public void initializeGame() {
         board = new Board();
         board.setupInitialPosition();
         currentTurn = PieceColor.WHITE;
+        whiteKingHasMoved = false;
+        blackKingHasMoved = false;
+        whiteKingsideRookHasMoved = false;
+        whiteQueensideRookHasMoved = false;
+        blackKingsideRookHasMoved = false;
+        blackQueensideRookHasMoved = false;
     }
 
     @SuppressFBWarnings(
@@ -291,6 +309,7 @@ public class Game {
         }
 
         if (isCastlingMove(piece, startRow, startCol, endRow, endCol)) {
+            validateCastlingRights(piece, startRow, startCol, endCol);
             validateCastlingDoesNotMoveThroughCheck(piece, startRow, startCol, endCol);
 
             castle(piece, endCol);
@@ -356,8 +375,73 @@ public class Game {
         promotePawnIfNeeded(piece, endRow, endCol, promotionType);
 
         updateEnPassantState(piece, startRow, startCol, endRow, endCol);
+        updateCastlingRights(piece, startRow, startCol);
 
         switchTurn();
+    }
+
+    private void updateCastlingRights(Piece piece, int startRow, int startCol) {
+        if (piece.getType() == PieceType.KING) {
+            if (piece.getColor() == PieceColor.WHITE) {
+                whiteKingHasMoved = true;
+            } else {
+                blackKingHasMoved = true;
+            }
+
+            return;
+        }
+
+        if (piece.getType() != PieceType.ROOK) {
+            return;
+        }
+
+        if (piece.getColor() == PieceColor.WHITE) {
+            if (startRow == 7 && startCol == 0) {
+                whiteQueensideRookHasMoved = true;
+            } else if (startRow == 7 && startCol == 7) {
+                whiteKingsideRookHasMoved = true;
+            }
+        } else {
+            if (startRow == 0 && startCol == 0) {
+                blackQueensideRookHasMoved = true;
+            } else if (startRow == 0 && startCol == 7) {
+                blackKingsideRookHasMoved = true;
+            }
+        }
+    }
+
+    private void validateCastlingRights(Piece king, int startRow, int startCol, int endCol) {
+        if (startCol != 4) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        if (king.getColor() == PieceColor.WHITE) {
+            if (startRow != 7 || whiteKingHasMoved) {
+                throw new IllegalArgumentException("Invalid castling move.");
+            }
+
+            if (endCol == 6 && whiteKingsideRookHasMoved) {
+                throw new IllegalArgumentException("Invalid castling move.");
+            }
+
+            if (endCol == 2 && whiteQueensideRookHasMoved) {
+                throw new IllegalArgumentException("Invalid castling move.");
+            }
+
+            return;
+        }
+
+        if (startRow != 0 || blackKingHasMoved) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        if (endCol == 6 && blackKingsideRookHasMoved) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
+
+        if (endCol == 2 && blackQueensideRookHasMoved) {
+            throw new IllegalArgumentException("Invalid castling move.");
+        }
     }
 
     private void validateCastlingDoesNotMoveThroughCheck(
