@@ -3234,6 +3234,44 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteQueensideCastleThroughCheck_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(7, 1, null);
+        board.setSquare(7, 2, null);
+        board.setSquare(7, 3, null);
+
+        board.setSquare(6, 3, null);
+        board.setSquare(5, 3, null);
+        board.setSquare(4, 3, null);
+        board.setSquare(3, 3, null);
+        board.setSquare(2, 3, null);
+        board.setSquare(1, 3, null);
+
+        board.setSquare(0, 3, new Piece(PieceType.ROOK, PieceColor.BLACK));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 2)
+        );
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(whiteRook, board.getSquare(7, 0));
+
+        assertTrue(board.isEmpty(7, 1));
+        assertTrue(board.isEmpty(7, 2));
+        assertTrue(board.isEmpty(7, 3));
+
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
