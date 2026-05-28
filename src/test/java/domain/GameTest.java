@@ -3601,6 +3601,40 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    @Test
+    public void MovePiece_WhiteQueensideCastleWithAttackOnB1_Succeeds() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(7, 1, null);
+        board.setSquare(7, 2, null);
+        board.setSquare(7, 3, null);
+
+        board.setSquare(6, 1, null);
+        board.setSquare(5, 1, null);
+        board.setSquare(4, 1, null);
+        board.setSquare(3, 1, null);
+        board.setSquare(2, 1, null);
+        board.setSquare(1, 1, null);
+
+        board.setSquare(0, 1, new Piece(PieceType.ROOK, PieceColor.BLACK));
+
+        game.movePiece(7, 4, 7, 2);
+
+        assertTrue(board.isEmpty(7, 4));
+        assertTrue(board.isEmpty(7, 0));
+
+        assertEquals(whiteKing, board.getSquare(7, 2));
+        assertEquals(whiteRook, board.getSquare(7, 3));
+
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
