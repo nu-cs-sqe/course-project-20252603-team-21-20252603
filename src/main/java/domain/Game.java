@@ -291,6 +291,10 @@ public class Game {
         }
 
         if (isCastlingMove(piece, startRow, startCol, endRow, endCol)) {
+            if (isKingInCheck(piece.getColor())) {
+                throw new IllegalArgumentException("Cannot castle while in check.");
+            }
+
             castle(piece, endCol);
             switchTurn();
             return;
