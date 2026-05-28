@@ -291,9 +291,7 @@ public class Game {
         }
 
         if (isCastlingMove(piece, startRow, startCol, endRow, endCol)) {
-            if (isKingInCheck(piece.getColor())) {
-                throw new IllegalArgumentException("Cannot castle while in check.");
-            }
+            validateCastlingDoesNotMoveThroughCheck(piece, startRow, startCol, endCol);
 
             castle(piece, endCol);
             switchTurn();
@@ -360,6 +358,36 @@ public class Game {
         updateEnPassantState(piece, startRow, startCol, endRow, endCol);
 
         switchTurn();
+    }
+
+    private void validateCastlingDoesNotMoveThroughCheck(
+            Piece king,
+            int startRow,
+            int startCol,
+            int endCol
+    ) {
+        if (isKingInCheck(king.getColor())) {
+            throw new IllegalArgumentException("Cannot castle while in check.");
+        }
+
+        int direction = Integer.compare(endCol, startCol);
+
+        for (int col = startCol + direction; col != endCol + direction; col += direction) {
+            Piece originalStartPiece = board.getSquare(startRow, startCol);
+            Piece originalTargetPiece = board.getSquare(startRow, col);
+
+            board.setSquare(startRow, col, king);
+            board.setSquare(startRow, startCol, null);
+
+            boolean kingInCheck = isKingInCheck(king.getColor());
+
+            board.setSquare(startRow, startCol, originalStartPiece);
+            board.setSquare(startRow, col, originalTargetPiece);
+
+            if (kingInCheck) {
+                throw new IllegalArgumentException("Cannot castle through check.");
+            }
+        }
     }
 
     private boolean isEnPassantMove(Piece piece, int startRow, int endRow, int endCol) {
