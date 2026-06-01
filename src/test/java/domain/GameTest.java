@@ -3771,6 +3771,148 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    // Code Coverage
+    @Test
+    public void MovePiece_WhiteQueensideCastleAfterQueensideRookMoved_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(6, 0, null);
+        board.setSquare(7, 1, null);
+        board.setSquare(7, 2, null);
+        board.setSquare(7, 3, null);
+
+        game.movePiece(7, 0, 6, 0);
+        game.movePiece(1, 0, 2, 0);
+        game.movePiece(6, 0, 7, 0);
+        game.movePiece(1, 1, 2, 1);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 2)
+        );
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(whiteRook, board.getSquare(7, 0));
+
+        assertTrue(board.isEmpty(7, 1));
+        assertTrue(board.isEmpty(7, 2));
+        assertTrue(board.isEmpty(7, 3));
+
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_BlackKingsideCastleAfterKingsideRookMoved_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackRook = board.getSquare(0, 7);
+
+        board.setSquare(0, 5, null);
+        board.setSquare(0, 6, null);
+
+        board.setSquare(1, 7, null);
+
+        game.movePiece(6, 0, 5, 0);
+        game.movePiece(0, 7, 1, 7);
+
+        game.movePiece(6, 1, 5, 1);
+        game.movePiece(1, 7, 0, 7);
+
+        game.movePiece(6, 2, 5, 2);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(0, 4, 0, 6)
+        );
+
+        assertEquals(blackKing, board.getSquare(0, 4));
+        assertEquals(blackRook, board.getSquare(0, 7));
+
+        assertTrue(board.isEmpty(0, 5));
+        assertTrue(board.isEmpty(0, 6));
+
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_BlackKingsideCastleAfterKingMoved_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackRook = board.getSquare(0, 7);
+
+        board.setSquare(0, 5, null);
+        board.setSquare(0, 6, null);
+
+        board.setSquare(1, 4, null);
+
+        game.movePiece(6, 0, 5, 0);
+        game.movePiece(0, 4, 1, 4);
+
+        game.movePiece(6, 1, 5, 1);
+        game.movePiece(1, 4, 0, 4);
+
+        game.movePiece(6, 2, 5, 2);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(0, 4, 0, 6)
+        );
+
+        assertEquals(blackKing, board.getSquare(0, 4));
+        assertEquals(blackRook, board.getSquare(0, 7));
+
+        assertTrue(board.isEmpty(0, 5));
+        assertTrue(board.isEmpty(0, 6));
+
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void MovePiece_BlackKingCastlingLikeMoveFromNonStartingSquare_ThrowsExceptionAndDoesNotChangeState() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackRook = board.getSquare(0, 7);
+
+        board.setSquare(2, 4, blackKing);
+        board.setSquare(0, 4, null);
+        board.setSquare(2, 5, null);
+        board.setSquare(2, 6, null);
+
+        game.movePiece(6, 0, 5, 0);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.movePiece(2, 4, 2, 6)
+        );
+
+        assertEquals(blackKing, board.getSquare(2, 4));
+        assertTrue(board.isEmpty(2, 5));
+        assertTrue(board.isEmpty(2, 6));
+
+        assertTrue(board.isEmpty(0, 4));
+        assertEquals(blackRook, board.getSquare(0, 7));
+
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
