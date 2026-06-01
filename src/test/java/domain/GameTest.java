@@ -4234,6 +4234,115 @@ public class GameTest {
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
     }
 
+    // castleBlackKingside
+    @Test
+    public void CastleBlackKingsideWithMissingRook_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 7, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackKingsideWithNonRookPiece_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackKnight = board.getSquare(0, 6);
+
+        board.setSquare(0, 7, blackKnight);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackKingsideBlockedAtF8_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 6, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackKingsideBlockedAtG8_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 5, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackKingsideWithWhiteRook_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+        Piece whiteRook = board.getSquare(7, 7);
+
+        board.setSquare(7, 7, null);
+        board.setSquare(0, 7, whiteRook);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
     private void assertPiece(
             Board board,
             int row,
