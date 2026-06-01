@@ -597,15 +597,9 @@ public class Game {
     private void castle(Piece king, int endCol) {
         if (king.getColor() == PieceColor.WHITE) {
             castleWhite(king, endCol);
-            return;
-        }
-
-        if (king.getColor() == PieceColor.BLACK) {
+        } else {
             castleBlack(king, endCol);
-            return;
         }
-
-        throw new IllegalArgumentException("Invalid castling move.");
     }
 
     private void castleWhite(Piece king, int endCol) {
