@@ -4515,6 +4515,35 @@ public class GameTest {
 
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
     }
+
+    // isPawnTwoSquareMove
+    @Test
+    public void IsPawnTwoSquareMove_WithDiagonalTwoSquarePawnMove_ReturnsFalse() throws Exception {
+        Game game = new Game();
+
+        Piece pawn = new Piece(PieceType.PAWN, PieceColor.WHITE);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isPawnTwoSquareMove",
+                Piece.class,
+                int.class,
+                int.class,
+                int.class,
+                int.class);
+
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(
+                game,
+                pawn,
+                6,
+                4,
+                0,
+                1);
+
+        assertFalse(result);
+    }
+
     private void assertPiece(
             Board board,
             int row,
