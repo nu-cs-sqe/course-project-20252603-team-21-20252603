@@ -3935,6 +3935,27 @@ public class GameTest {
         assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
+    // movePiece
+    @Test
+    public void MovePiece_BlackPawnMovesTwoSquaresFromNonStartingRow_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackPawn = board.getSquare(1, 0);
+        board.setSquare(1, 0, null);
+        board.setSquare(2, 0, blackPawn);
+
+        game.movePiece(6, 1, 5, 1);
+
+        assertThrows(IllegalArgumentException.class, () -> game.movePiece(2, 0, 4, 0));
+
+        assertEquals(blackPawn, board.getSquare(2, 0));
+        assertTrue(board.isEmpty(4, 0));
+        assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
     private void assertPiece(
             Board board,
             int row,
