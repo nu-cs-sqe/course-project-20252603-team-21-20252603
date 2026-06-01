@@ -4343,6 +4343,139 @@ public class GameTest {
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
     }
 
+    // castleBlackQueenside
+    @Test
+    public void CastleBlackQueensideWithMissingRook_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 0, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackQueensideWithNonRookPiece_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+        Piece blackKnight = board.getSquare(0, 1);
+
+        board.setSquare(0, 0, blackKnight);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackQueensideWithWhiteRook_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+        Piece whiteRook = board.getSquare(7, 0);
+
+        board.setSquare(7, 0, null);
+        board.setSquare(0, 0, whiteRook);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackQueensideBlockedAtB8_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 2, null);
+        board.setSquare(0, 3, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackQueensideBlockedAtC8_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 1, null);
+        board.setSquare(0, 3, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    @Test
+    public void CastleBlackQueensideBlockedAtD8_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        board.setSquare(0, 1, null);
+        board.setSquare(0, 2, null);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlackQueenside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
     private void assertPiece(
             Board board,
             int row,
