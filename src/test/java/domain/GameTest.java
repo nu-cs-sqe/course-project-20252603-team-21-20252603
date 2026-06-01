@@ -3989,6 +3989,58 @@ public class GameTest {
         }
     }
 
+    // isAttackedByPawn
+    @Test
+    public void IsKingInCheck_WhiteKingAttackedByBlackPawnFromRightDiagonal_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece blackPawn = board.getSquare(1, 0);
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(4, 4, whiteKing);
+        board.setSquare(3, 5, blackPawn);
+
+        assertTrue(game.isKingInCheck(PieceColor.WHITE));
+    }
+
+    @Test
+    public void IsKingInCheck_BlackKingAttackedByWhitePawns_ReturnsTrue() {
+        int[][] pawnPositions = {
+                {5, 3},
+                {5, 5}
+        };
+
+        for (int[] position : pawnPositions) {
+            Game game = new Game();
+            game.initializeGame();
+
+            Board board = game.getBoard();
+
+            Piece blackKing = board.getSquare(0, 4);
+            Piece whitePawn = board.getSquare(6, 0);
+
+            for (int row = 0; row < 8; row++) {
+                for (int col = 0; col < 8; col++) {
+                    board.setSquare(row, col, null);
+                }
+            }
+
+            board.setSquare(4, 4, blackKing);
+            board.setSquare(position[0], position[1], whitePawn);
+
+            assertTrue(game.isKingInCheck(PieceColor.BLACK));
+        }
+    }
+
     private void assertPiece(
             Board board,
             int row,
