@@ -4041,6 +4041,29 @@ public class GameTest {
         }
     }
 
+    // isAttackedByBishopOrQueen
+    @Test
+    public void IsKingInCheck_WhiteKingAttackedByBlackBishopFromDownRightDiagonal_ReturnsTrue() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece blackBishop = board.getSquare(0, 2);
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(4, 4, whiteKing);
+        board.setSquare(6, 6, blackBishop);
+
+        assertTrue(game.isKingInCheck(PieceColor.WHITE));
+    }
+
     private void assertPiece(
             Board board,
             int row,
