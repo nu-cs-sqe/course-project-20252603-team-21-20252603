@@ -3956,6 +3956,39 @@ public class GameTest {
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
     }
 
+    // isAttackedByKnight
+    @Test
+    public void IsKingInCheck_WhiteKingAttackedByBlackKnightFromAllRemainingOffsets_ReturnsTrue() {
+        int[][] knightPositions = {
+                {2, 3},
+                {3, 2},
+                {5, 2},
+                {5, 6},
+                {6, 3},
+                {6, 5}
+        };
+
+        for (int[] position : knightPositions) {
+            Game game = new Game();
+            game.initializeGame();
+
+            Board board = game.getBoard();
+            Piece whiteKing = board.getSquare(7, 4);
+            Piece blackKnight = board.getSquare(0, 1);
+
+            for (int row = 0; row < 8; row++) {
+                for (int col = 0; col < 8; col++) {
+                    board.setSquare(row, col, null);
+                }
+            }
+
+            board.setSquare(4, 4, whiteKing);
+            board.setSquare(position[0], position[1], blackKnight);
+
+            assertTrue(game.isKingInCheck(PieceColor.WHITE));
+        }
+    }
+
     private void assertPiece(
             Board board,
             int row,
