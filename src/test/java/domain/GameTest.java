@@ -4064,6 +4064,65 @@ public class GameTest {
         assertTrue(game.isKingInCheck(PieceColor.WHITE));
     }
 
+    // castleWhiteKingside
+    @Test
+    public void MovePiece_WhiteKingsideCastleWithNonRookPiece_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece whiteKnight = board.getSquare(7, 6);
+
+        board.setSquare(7, 5, null);
+        board.setSquare(7, 6, null);
+        board.setSquare(7, 7, whiteKnight);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 6));
+
+        assertEquals(whiteKing, board.getSquare(7, 4));
+        assertEquals(whiteKnight, board.getSquare(7, 7));
+    }
+
+    @Test
+    public void MovePiece_WhiteKingsideCastleBlockedAtFinalSquare_ThrowsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        board.setSquare(7, 5, null);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> game.movePiece(7, 4, 7, 6));
+    }
+
+    @Test
+    public void CastleWhiteKingsideWithBlackRook_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece whiteKing = board.getSquare(7, 4);
+        Piece blackRook = board.getSquare(0, 7);
+
+        board.setSquare(0, 7, null);
+        board.setSquare(7, 7, blackRook);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleWhiteKingside", Piece.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, whiteKing));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
     private void assertPiece(
             Board board,
             int row,
