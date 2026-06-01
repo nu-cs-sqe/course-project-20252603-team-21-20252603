@@ -5,6 +5,7 @@ import com.github.spotbugs.snom.SpotBugsTask
 plugins {
     id("java")
     checkstyle
+    jacoco
     id("com.github.spotbugs") version "6.0.25"
 }
 
@@ -33,6 +34,21 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
 }
 
 checkstyle {
