@@ -4476,6 +4476,45 @@ public class GameTest {
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
     }
 
+    // castleWhite
+    @Test
+    public void CastleWhiteWithInvalidEndColumn_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece whiteKing = board.getSquare(7, 4);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleWhite", Piece.class, int.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, whiteKing, 5));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
+    // castleBlack
+    @Test
+    public void CastleBlackWithInvalidEndColumn_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "castleBlack", Piece.class, int.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackKing, 5));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
     private void assertPiece(
             Board board,
             int row,
