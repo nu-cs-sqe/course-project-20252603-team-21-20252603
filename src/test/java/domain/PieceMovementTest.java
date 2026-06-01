@@ -111,4 +111,23 @@ public class PieceMovementTest {
         assertFalse(rook.isValidMovePattern(7, 0, 7, 0));
     }
 
+    // Code Coverage
+    @Test
+    public void BlackPawn_InvalidMovePattern_ReturnsFalse() {
+        Piece pawn = new Piece(PieceType.PAWN, PieceColor.BLACK);
+
+        assertFalse(pawn.isValidMovePattern(1, 0, 4, 0));
+    }
+
+    @Test
+    public void PawnWithNullColor_IsNotValidBlackPawnMove() throws Exception {
+        Piece pawn = new Piece(PieceType.PAWN, PieceColor.WHITE);
+
+        java.lang.reflect.Field colorField = Piece.class.getDeclaredField("color");
+        colorField.setAccessible(true);
+        colorField.set(pawn, null);
+
+        assertFalse(pawn.isValidMovePattern(1, 0, 2, 0));
+    }
+
 }
