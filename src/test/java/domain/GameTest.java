@@ -3772,6 +3772,7 @@ public class GameTest {
     }
 
     // Code Coverage
+    // validateCastlingRights
     @Test
     public void MovePiece_WhiteQueensideCastleAfterQueensideRookMoved_ThrowsExceptionAndDoesNotChangeState() {
         Game game = new Game();
@@ -3911,6 +3912,27 @@ public class GameTest {
         assertEquals(blackRook, board.getSquare(0, 7));
 
         assertEquals(PieceColor.BLACK, game.getCurrentTurn());
+    }
+
+    // updateCastlingRights
+    @Test
+    public void MovePiece_BlackRookFromNonStartingColumn_DoesNotUpdateCastlingRights() {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+
+        Piece blackRook = board.getSquare(0, 7);
+        board.setSquare(0, 7, null);
+        board.setSquare(0, 6, null);
+        board.setSquare(0, 5, blackRook);
+
+        game.movePiece(6, 0, 5, 0);
+        game.movePiece(0, 5, 0, 6);
+
+        assertTrue(board.isEmpty(0, 5));
+        assertEquals(blackRook, board.getSquare(0, 6));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
     }
 
     private void assertPiece(
