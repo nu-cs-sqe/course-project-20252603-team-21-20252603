@@ -4626,6 +4626,94 @@ public class GameTest {
         assertFalse(result);
     }
 
+    @Test
+    public void IsAttackedByKing_EnemyKingDownRight_ReturnsTrue() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(5, 5, blackKing);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isAttackedByKing", PieceColor.class, int.class, int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, PieceColor.WHITE, 4, 4);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void IsAttackedByKing_EnemyKingRight_ReturnsTrue() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece blackKing = board.getSquare(0, 4);
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                board.setSquare(row, col, null);
+            }
+        }
+
+        board.setSquare(4, 5, blackKing);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isAttackedByKing", PieceColor.class, int.class, int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, PieceColor.WHITE, 4, 4);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void IsAttackedByKing_EnemyKingInAnyAdjacentSquare_ReturnsTrue() throws Exception {
+        int[][] positions = {
+                {3, 3},
+                {3, 4},
+                {3, 5},
+                {4, 3},
+                {4, 5},
+                {5, 3},
+                {5, 4},
+                {5, 5}
+        };
+
+        for (int[] position : positions) {
+            Game game = new Game();
+            game.initializeGame();
+
+            Board board = game.getBoard();
+            Piece blackKing = board.getSquare(0, 4);
+
+            for (int row = 0; row < 8; row++) {
+                for (int col = 0; col < 8; col++) {
+                    board.setSquare(row, col, null);
+                }
+            }
+
+            board.setSquare(position[0], position[1], blackKing);
+
+            java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                    "isAttackedByKing", PieceColor.class, int.class, int.class);
+            method.setAccessible(true);
+
+            boolean result = (boolean) method.invoke(game, PieceColor.WHITE, 4, 4);
+
+            assertTrue(result);
+        }
+    }
+
     private void assertPiece(
             Board board,
             int row,

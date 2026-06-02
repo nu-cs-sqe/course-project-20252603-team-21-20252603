@@ -135,17 +135,19 @@ public class Game {
     }
 
     private boolean isAttackedByKing(PieceColor kingColor, int kingRow, int kingCol) {
-        for (int rowOffset = -1; rowOffset <= 1; rowOffset++) {
-            for (int colOffset = -1; colOffset <= 1; colOffset++) {
-                if (rowOffset != 0 || colOffset != 0) {
-                    if (isEnemyKingAt(kingColor, kingRow + rowOffset, kingCol + colOffset)) {
-                        return true;
-                    }
-                }
-            }
-        }
+        int above = Math.addExact(kingRow, -1);
+        int below = Math.addExact(kingRow, 1);
+        int left = Math.addExact(kingCol, -1);
+        int right = Math.addExact(kingCol, 1);
 
-        return false;
+        return isEnemyKingAt(kingColor, above, left)
+                || isEnemyKingAt(kingColor, above, kingCol)
+                || isEnemyKingAt(kingColor, above, right)
+                || isEnemyKingAt(kingColor, kingRow, left)
+                || isEnemyKingAt(kingColor, kingRow, right)
+                || isEnemyKingAt(kingColor, below, left)
+                || isEnemyKingAt(kingColor, below, kingCol)
+                || isEnemyKingAt(kingColor, below, right);
     }
 
     private boolean isEnemyKingAt(PieceColor kingColor, int row, int col) {
