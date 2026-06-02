@@ -4730,6 +4730,38 @@ public class GameTest {
         assertTrue(result);
     }
 
+    @Test
+    public void IsOutsideBoard_RowZero_ReturnsFalse() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isOutsideBoard",
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 0, 4);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void IsOutsideBoard_ColumnZero_ReturnsFalse() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isOutsideBoard",
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 4, 0);
+
+        assertFalse(result);
+    }
+
     private void assertPiece(
             Board board,
             int row,
