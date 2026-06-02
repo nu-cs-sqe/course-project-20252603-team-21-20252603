@@ -185,14 +185,24 @@ public class Game {
     }
 
     private boolean isAttackedByKnight(PieceColor kingColor, int kingRow, int kingCol) {
-        return isEnemyKnightAt(kingColor, kingRow - 2, kingCol - 1)
-                || isEnemyKnightAt(kingColor, kingRow - 2, kingCol + 1)
-                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol - 2)
-                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol + 2)
-                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol - 2)
-                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol + 2)
-                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol - 1)
-                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol + 1);
+        int twoRowsUp = Math.addExact(kingRow, -2);
+        int oneRowUp = Math.addExact(kingRow, -1);
+        int oneRowDown = Math.addExact(kingRow, 1);
+        int twoRowsDown = Math.addExact(kingRow, 2);
+
+        int twoColsLeft = Math.addExact(kingCol, -2);
+        int oneColLeft = Math.addExact(kingCol, -1);
+        int oneColRight = Math.addExact(kingCol, 1);
+        int twoColsRight = Math.addExact(kingCol, 2);
+
+        return isEnemyKnightAt(kingColor, twoRowsUp, oneColLeft)
+                || isEnemyKnightAt(kingColor, twoRowsUp, oneColRight)
+                || isEnemyKnightAt(kingColor, oneRowUp, twoColsLeft)
+                || isEnemyKnightAt(kingColor, oneRowUp, twoColsRight)
+                || isEnemyKnightAt(kingColor, oneRowDown, twoColsLeft)
+                || isEnemyKnightAt(kingColor, oneRowDown, twoColsRight)
+                || isEnemyKnightAt(kingColor, twoRowsDown, oneColLeft)
+                || isEnemyKnightAt(kingColor, twoRowsDown, oneColRight);
     }
 
     private boolean isAttackedByPawn(PieceColor kingColor, int kingRow, int kingCol) {
