@@ -251,7 +251,7 @@ public class Game {
         int row = kingRow + rowStep;
         int col = kingCol + colStep;
 
-        while (row >= 0 && row < board.getSize() && col >= 0 && col < board.getSize()) {
+        while (isInsideBoard(row, col)) {
             Piece piece = board.getSquare(row, col);
 
             if (piece != null) {
@@ -265,6 +265,22 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean isInsideBoard(int row, int col) {
+        if (row < 0) {
+            return false;
+        }
+
+        if (row >= board.getSize()) {
+            return false;
+        }
+
+        if (col < 0) {
+            return false;
+        }
+
+        return col < board.getSize();
     }
 
     private boolean isEnemyKnightAt(PieceColor kingColor, int row, int col) {

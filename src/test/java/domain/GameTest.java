@@ -4714,6 +4714,22 @@ public class GameTest {
         }
     }
 
+    @Test
+    public void IsInsideBoard_ColumnZero_ReturnsTrue() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "isInsideBoard",
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 0, 0);
+
+        assertTrue(result);
+    }
+
     private void assertPiece(
             Board board,
             int row,
