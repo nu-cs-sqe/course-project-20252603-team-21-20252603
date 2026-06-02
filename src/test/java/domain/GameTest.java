@@ -4544,6 +4544,88 @@ public class GameTest {
         assertFalse(result);
     }
 
+    // Mutation Tests
+    @Test
+    public void CanMoveWithoutChangingGameState_ValidMoveReturnsTrueAndRestoresBoard() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Board board = game.getBoard();
+        Piece pawn = board.getSquare(6, 0);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "canMoveWithoutChangingGameState",
+                int.class,
+                int.class,
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 6, 0, 5, 0);
+
+        assertTrue(result);
+        assertEquals(pawn, board.getSquare(6, 0));
+        assertNull(board.getSquare(5, 0));
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void CanMoveWithoutChangingGameState_InvalidMoveReturnsFalse() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "canMoveWithoutChangingGameState",
+                int.class,
+                int.class,
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 6, 0, 4, 1);
+
+        assertFalse(result);
+        assertEquals(PieceColor.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void CanMoveWithoutChangingGameState_ValidMoveReturnsTrue() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "canMoveWithoutChangingGameState",
+                int.class,
+                int.class,
+                int.class,
+                int.class);
+
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 6, 0, 5, 0);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void CanMoveWithoutChangingGameState_OwnPieceDestinationReturnsFalse() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "canMoveWithoutChangingGameState",
+                int.class,
+                int.class,
+                int.class,
+                int.class);
+
+        method.setAccessible(true);
+
+        boolean result = (boolean) method.invoke(game, 7, 0, 7, 1);
+
+        assertFalse(result);
+    }
+
     private void assertPiece(
             Board board,
             int row,

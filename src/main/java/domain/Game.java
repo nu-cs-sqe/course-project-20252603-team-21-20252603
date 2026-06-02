@@ -95,18 +95,21 @@ public class Game {
         Piece startPiece = board.getSquare(startRow, startCol);
         Piece endPiece = board.getSquare(endRow, endCol);
         PieceColor originalTurn = currentTurn;
+        boolean canMove = false;
 
         try {
             currentTurn = startPiece.getColor();
             movePiece(startRow, startCol, endRow, endCol);
-            return true;
+            canMove = true;
         } catch (IllegalArgumentException | IndexOutOfBoundsException exception) {
-            return false;
+            canMove = false;
         } finally {
             board.setSquare(startRow, startCol, startPiece);
             board.setSquare(endRow, endCol, endPiece);
             currentTurn = originalTurn;
         }
+
+        return canMove;
     }
 
     public boolean isKingInCheck(PieceColor color) {
