@@ -130,4 +130,12 @@ public class PieceMovementTest {
         assertFalse(pawn.isValidMovePattern(1, 0, 2, 0));
     }
 
+    // Mutation Tests
+    @Test
+    public void Knight_OneByTwoMove_ReturnsTrue() {
+        Piece knight = new Piece(PieceType.KNIGHT, PieceColor.WHITE);
+
+        assertTrue(knight.isValidMovePattern(4, 4, 5, 6));
+    }
+
 }
