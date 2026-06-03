@@ -4762,6 +4762,30 @@ public class GameTest {
         assertFalse(result);
     }
 
+    @Test
+    public void MovePiece_StartSquareOutOfBounds_ThrowsIndexOutOfBoundsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> game.movePiece(-1, 0, 5, 0));
+
+        assertEquals("Position is outside the board.", exception.getMessage());
+    }
+
+    @Test
+    public void MovePiece_EndSquareOutOfBounds_ThrowsIndexOutOfBoundsException() {
+        Game game = new Game();
+        game.initializeGame();
+
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> game.movePiece(6, 0, -1, 0));
+
+        assertEquals("Position is outside the board.", exception.getMessage());
+    }
+
     private void assertPiece(
             Board board,
             int row,
