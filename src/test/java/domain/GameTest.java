@@ -4854,6 +4854,27 @@ public class GameTest {
         assertFalse((boolean) field.get(game));
     }
 
+    @Test
+    public void ValidatePromotionType_BlackPawnPromotingToKingOnFinalRank_ThrowsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        Piece blackPawn = new Piece(PieceType.PAWN, PieceColor.BLACK);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "validatePromotionType",
+                Piece.class,
+                int.class,
+                PieceType.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, blackPawn, 7, PieceType.KING));
+
+        assertTrue(exception.getCause() instanceof IllegalArgumentException);
+    }
+
     private void assertPiece(
             Board board,
             int row,
