@@ -4786,6 +4786,74 @@ public class GameTest {
         assertEquals("Position is outside the board.", exception.getMessage());
     }
 
+    @Test
+    public void UpdateCastlingRights_WhiteRookFromWrongKingsideColumn_DoesNotSetKingsideFlag() throws Exception {
+        Game game = new Game();
+        Piece whiteRook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "updateCastlingRights", Piece.class, int.class, int.class);
+        method.setAccessible(true);
+
+        method.invoke(game, whiteRook, 7, 6);
+
+        java.lang.reflect.Field field = Game.class.getDeclaredField("whiteKingsideRookHasMoved");
+        field.setAccessible(true);
+
+        assertFalse((boolean) field.get(game));
+    }
+
+    @Test
+    public void UpdateCastlingRights_WhiteRookFromWrongQueensideRow_DoesNotSetQueensideFlag() throws Exception {
+        Game game = new Game();
+        Piece whiteRook = new Piece(PieceType.ROOK, PieceColor.WHITE);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "updateCastlingRights", Piece.class, int.class, int.class);
+        method.setAccessible(true);
+
+        method.invoke(game, whiteRook, 6, 0);
+
+        java.lang.reflect.Field field = Game.class.getDeclaredField("whiteQueensideRookHasMoved");
+        field.setAccessible(true);
+
+        assertFalse((boolean) field.get(game));
+    }
+
+    @Test
+    public void UpdateCastlingRights_BlackRookFromWrongQueensideRow_DoesNotSetQueensideFlag() throws Exception {
+        Game game = new Game();
+        Piece blackRook = new Piece(PieceType.ROOK, PieceColor.BLACK);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "updateCastlingRights", Piece.class, int.class, int.class);
+        method.setAccessible(true);
+
+        method.invoke(game, blackRook, 1, 0);
+
+        java.lang.reflect.Field field = Game.class.getDeclaredField("blackQueensideRookHasMoved");
+        field.setAccessible(true);
+
+        assertFalse((boolean) field.get(game));
+    }
+
+    @Test
+    public void UpdateCastlingRights_BlackRookFromWrongKingsideRow_DoesNotSetKingsideFlag() throws Exception {
+        Game game = new Game();
+        Piece blackRook = new Piece(PieceType.ROOK, PieceColor.BLACK);
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "updateCastlingRights", Piece.class, int.class, int.class);
+        method.setAccessible(true);
+
+        method.invoke(game, blackRook, 1, 7);
+
+        java.lang.reflect.Field field = Game.class.getDeclaredField("blackKingsideRookHasMoved");
+        field.setAccessible(true);
+
+        assertFalse((boolean) field.get(game));
+    }
+
     private void assertPiece(
             Board board,
             int row,
