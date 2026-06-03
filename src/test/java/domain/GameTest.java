@@ -4875,6 +4875,42 @@ public class GameTest {
         assertTrue(exception.getCause() instanceof IllegalArgumentException);
     }
 
+    @Test
+    public void ValidateBounds_RowEqualsBoardSize_ThrowsIndexOutOfBoundsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "validateBounds",
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, 8, 0));
+
+        assertTrue(exception.getCause() instanceof IndexOutOfBoundsException);
+    }
+
+    @Test
+    public void ValidateBounds_ColEqualsBoardSize_ThrowsIndexOutOfBoundsException() throws Exception {
+        Game game = new Game();
+        game.initializeGame();
+
+        java.lang.reflect.Method method = Game.class.getDeclaredMethod(
+                "validateBounds",
+                int.class,
+                int.class);
+        method.setAccessible(true);
+
+        java.lang.reflect.InvocationTargetException exception =
+                assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> method.invoke(game, 0, 8));
+
+        assertTrue(exception.getCause() instanceof IndexOutOfBoundsException);
+    }
+
     private void assertPiece(
             Board board,
             int row,
