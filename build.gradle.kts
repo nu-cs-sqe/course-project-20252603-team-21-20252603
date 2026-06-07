@@ -1,11 +1,14 @@
 import com.github.spotbugs.snom.Confidence
 import com.github.spotbugs.snom.Effort
 import com.github.spotbugs.snom.SpotBugsTask
+import info.solidsoft.gradle.pitest.PitestTask
 
 plugins {
     id("java")
     checkstyle
+    jacoco
     id("com.github.spotbugs") version "6.0.25"
+    id("info.solidsoft.pitest") version "1.15.0"
 }
 
 group = "nu.csse.sqe"
@@ -33,6 +36,21 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
 }
 
 checkstyle {
@@ -64,4 +82,13 @@ tasks.spotbugsMain {
         outputLocation = layout.buildDirectory.file("reports/spotbugs/spotbugs.html")
         setStylesheet("fancy-hist.xsl")
     }
+}
+
+pitest {
+    targetClasses.set(listOf("domain.*"))
+    targetTests.set(listOf("domain.*"))
+    junit5PluginVersion.set("1.2.1")
+    threads.set(4)
+    outputFormats.set(listOf("HTML", "XML"))
+    timestampedReports.set(false)
 }

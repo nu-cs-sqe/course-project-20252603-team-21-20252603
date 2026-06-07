@@ -95,18 +95,21 @@ public class Game {
         Piece startPiece = board.getSquare(startRow, startCol);
         Piece endPiece = board.getSquare(endRow, endCol);
         PieceColor originalTurn = currentTurn;
+        boolean canMove = false;
 
         try {
             currentTurn = startPiece.getColor();
             movePiece(startRow, startCol, endRow, endCol);
-            return true;
+            canMove = true;
         } catch (IllegalArgumentException | IndexOutOfBoundsException exception) {
-            return false;
+            canMove = false;
         } finally {
             board.setSquare(startRow, startCol, startPiece);
             board.setSquare(endRow, endCol, endPiece);
             currentTurn = originalTurn;
         }
+
+        return canMove;
     }
 
     public boolean isKingInCheck(PieceColor color) {
@@ -132,17 +135,19 @@ public class Game {
     }
 
     private boolean isAttackedByKing(PieceColor kingColor, int kingRow, int kingCol) {
-        for (int rowOffset = -1; rowOffset <= 1; rowOffset++) {
-            for (int colOffset = -1; colOffset <= 1; colOffset++) {
-                if (rowOffset != 0 || colOffset != 0) {
-                    if (isEnemyKingAt(kingColor, kingRow + rowOffset, kingCol + colOffset)) {
-                        return true;
-                    }
-                }
-            }
-        }
+        int above = Math.addExact(kingRow, -1);
+        int below = Math.addExact(kingRow, 1);
+        int left = Math.addExact(kingCol, -1);
+        int right = Math.addExact(kingCol, 1);
 
-        return false;
+        return isEnemyKingAt(kingColor, above, left)
+                || isEnemyKingAt(kingColor, above, kingCol)
+                || isEnemyKingAt(kingColor, above, right)
+                || isEnemyKingAt(kingColor, kingRow, left)
+                || isEnemyKingAt(kingColor, kingRow, right)
+                || isEnemyKingAt(kingColor, below, left)
+                || isEnemyKingAt(kingColor, below, kingCol)
+                || isEnemyKingAt(kingColor, below, right);
     }
 
     private boolean isEnemyKingAt(PieceColor kingColor, int row, int col) {
@@ -180,14 +185,24 @@ public class Game {
     }
 
     private boolean isAttackedByKnight(PieceColor kingColor, int kingRow, int kingCol) {
-        return isEnemyKnightAt(kingColor, kingRow - 2, kingCol - 1)
-                || isEnemyKnightAt(kingColor, kingRow - 2, kingCol + 1)
-                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol - 2)
-                || isEnemyKnightAt(kingColor, kingRow - 1, kingCol + 2)
-                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol - 2)
-                || isEnemyKnightAt(kingColor, kingRow + 1, kingCol + 2)
-                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol - 1)
-                || isEnemyKnightAt(kingColor, kingRow + 2, kingCol + 1);
+        int twoRowsUp = Math.addExact(kingRow, -2);
+        int oneRowUp = Math.addExact(kingRow, -1);
+        int oneRowDown = Math.addExact(kingRow, 1);
+        int twoRowsDown = Math.addExact(kingRow, 2);
+
+        int twoColsLeft = Math.addExact(kingCol, -2);
+        int oneColLeft = Math.addExact(kingCol, -1);
+        int oneColRight = Math.addExact(kingCol, 1);
+        int twoColsRight = Math.addExact(kingCol, 2);
+
+        return isEnemyKnightAt(kingColor, twoRowsUp, oneColLeft)
+                || isEnemyKnightAt(kingColor, twoRowsUp, oneColRight)
+                || isEnemyKnightAt(kingColor, oneRowUp, twoColsLeft)
+                || isEnemyKnightAt(kingColor, oneRowUp, twoColsRight)
+                || isEnemyKnightAt(kingColor, oneRowDown, twoColsLeft)
+                || isEnemyKnightAt(kingColor, oneRowDown, twoColsRight)
+                || isEnemyKnightAt(kingColor, twoRowsDown, oneColLeft)
+                || isEnemyKnightAt(kingColor, twoRowsDown, oneColRight);
     }
 
     private boolean isAttackedByPawn(PieceColor kingColor, int kingRow, int kingCol) {
@@ -236,7 +251,7 @@ public class Game {
         int row = kingRow + rowStep;
         int col = kingCol + colStep;
 
-        while (row >= 0 && row < board.getSize() && col >= 0 && col < board.getSize()) {
+        while (isInsideBoard(row, col)) {
             Piece piece = board.getSquare(row, col);
 
             if (piece != null) {
@@ -250,6 +265,22 @@ public class Game {
         }
 
         return false;
+    }
+
+    private boolean isInsideBoard(int row, int col) {
+        if (row < 0) {
+            return false;
+        }
+
+        if (row >= board.getSize()) {
+            return false;
+        }
+
+        if (col < 0) {
+            return false;
+        }
+
+        return col < board.getSize();
     }
 
     private boolean isEnemyKnightAt(PieceColor kingColor, int row, int col) {
@@ -597,15 +628,9 @@ public class Game {
     private void castle(Piece king, int endCol) {
         if (king.getColor() == PieceColor.WHITE) {
             castleWhite(king, endCol);
-            return;
-        }
-
-        if (king.getColor() == PieceColor.BLACK) {
+        } else {
             castleBlack(king, endCol);
-            return;
         }
-
-        throw new IllegalArgumentException("Invalid castling move.");
     }
 
     private void castleWhite(Piece king, int endCol) {
