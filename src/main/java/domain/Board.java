@@ -2,10 +2,14 @@ package domain;
 
 public class Board {
 
-    private final Piece[][] squares = new Piece[8][8];
+    private static final int TOTAL_NUM_RANKS = 8;
+
+    private static final int TOTAL_NUM_FILES = 8;
+
+    private final Piece[][] squares = new Piece[TOTAL_NUM_RANKS][TOTAL_NUM_FILES];
 
     public int getSize() {
-        return 8;
+        return TOTAL_NUM_RANKS;
     }
 
     public Piece getSquare(int row, int col) {
@@ -26,8 +30,8 @@ public class Board {
 
 
     private void clearBoard() {
-        for (int row = 0; row < getSize(); row++) {
-            for (int col = 0; col < getSize(); col++) {
+        for (int row = 0; row < TOTAL_NUM_RANKS; row++) {
+            for (int col = 0; col < TOTAL_NUM_FILES; col++) {
                 squares[row][col] = null;
             }
         }
