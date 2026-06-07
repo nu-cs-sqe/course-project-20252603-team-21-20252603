@@ -52,6 +52,19 @@ Finishing from Week 4:
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/31
 5. [in progress] Sid Javeri: Designing BVA and TDD plan for king check validation and self-check move rejection
 
+# Week 9 (05/25/2026-05/31/2026)
+**Planning and Progress Tracking**:
+1. [done] Sid Javeri: Completed comprehensive castling legality implementation in `movePiece(...)` using TDD + BVA, including prevention of castling while currently in check, prevention of castling through attacked squares, prevention of castling into attacked destination squares, and validation symmetry across white/black and kingside/queenside castling scenarios, while also refactoring legality validation into helper methods to improve readability and keep `movePiece(...)` orchestration-focused
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+2. [done] Sid Javeri: Added persistent castling-rights tracking for kings and rooks, including prevention of castling after prior king or rook movement even if the pieces later returned to their original starting squares
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+3. [done] Sid Javeri: Added and validated TC1–TC18 from `GameCastlingLegality.md` using strict TDD workflow (failing test → minimal implementation → passing test), including comprehensive validation coverage for attacked intermediate squares, attacked destination squares, blocked attack paths, and castling-right invalidation scenarios
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+4. [done] Sid Javeri: Expanded BVA documentation for castling legality edge cases and symmetric validation scenarios for both white and black castling behavior
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/30
+5. [done] Sid Javeri: Revalidated project correctness and style compliance after castling legality integration using `./gradlew build` and `./gradlew check`
+- https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
+
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
 1. [done] Person: Task (Links to PR)
