@@ -3,6 +3,7 @@ package domain;
 public class Board {
 
     private static final int TOTAL_NUM_RANKS = 8;
+
     private static final int TOTAL_NUM_FILES = 8;
 
     private final Piece[][] squares = new Piece[TOTAL_NUM_RANKS][TOTAL_NUM_FILES];
