@@ -5,10 +5,15 @@ import info.solidsoft.gradle.pitest.PitestTask
 
 plugins {
     id("java")
+    application
     checkstyle
     jacoco
     id("com.github.spotbugs") version "6.0.25"
     id("info.solidsoft.pitest") version "1.15.0"
+}
+
+application {
+    mainClass = "ui.Main"
 }
 
 group = "nu.csse.sqe"
