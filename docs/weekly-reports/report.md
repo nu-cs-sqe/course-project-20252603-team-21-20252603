@@ -65,8 +65,11 @@ Finishing from Week 4:
 5. [done] Sid Javeri: Revalidated project correctness and style compliance after castling legality integration using `./gradlew build` and `./gradlew check`
 - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/25
 
-# Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
+# Week 10 (06/01/2026-06/07/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
-1. [done] Person: Task (Links to PR)
-2. [not started] Person: Task (Links to PR)
-3. [80% done] Person: Task (Links to PR)
+1. [done] Ryan Lei: added the locale requirements, for English and Spanish, finished completely and merged from main
+   - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/42
+3. [done] Ryan Lei: added a fully functional UI, with support for Spanish and English locales, with all functionality and the fully tested backend
+   - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/43
+5. [done] Ryan Lei: added integration testing on two key features, using Cucumber and Gherkin syntax along with step definitions.
+   - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/41
