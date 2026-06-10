@@ -1,11 +1,19 @@
 import com.github.spotbugs.snom.Confidence
 import com.github.spotbugs.snom.Effort
 import com.github.spotbugs.snom.SpotBugsTask
+import info.solidsoft.gradle.pitest.PitestTask
 
 plugins {
     id("java")
+    application
     checkstyle
+    jacoco
     id("com.github.spotbugs") version "6.0.25"
+    id("info.solidsoft.pitest") version "1.15.0"
+}
+
+application {
+    mainClass = "ui.Main"
 }
 
 group = "nu.csse.sqe"
@@ -18,6 +26,9 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.platform:junit-platform-suite")
+    testImplementation("io.cucumber:cucumber-java:7.18.1")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.18.1")
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.6")
 }
 
@@ -33,6 +44,21 @@ tasks.compileJava {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
 }
 
 checkstyle {
@@ -64,4 +90,13 @@ tasks.spotbugsMain {
         outputLocation = layout.buildDirectory.file("reports/spotbugs/spotbugs.html")
         setStylesheet("fancy-hist.xsl")
     }
+}
+
+pitest {
+    targetClasses.set(listOf("domain.*"))
+    targetTests.set(listOf("domain.*"))
+    junit5PluginVersion.set("1.2.1")
+    threads.set(4)
+    outputFormats.set(listOf("HTML", "XML"))
+    timestampedReports.set(false)
 }

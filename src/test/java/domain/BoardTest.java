@@ -196,6 +196,31 @@ public class BoardTest {
         return count;
     }
 
+    // Mutation Tests
+    @Test
+    public void SetupInitialPosition_ClearsExistingPieces() {
+        Board board = new Board();
+
+        board.setSquare(4, 4,
+                new Piece(PieceType.QUEEN, PieceColor.WHITE));
+
+        board.setupInitialPosition();
+
+        assertNull(board.getSquare(4, 4));
+    }
+
+    @Test
+    public void SetupInitialPosition_ClearsEntireBoardBeforeSetup() {
+        Board board = new Board();
+
+        board.setSquare(3, 3,
+                new Piece(PieceType.BISHOP, PieceColor.BLACK));
+
+        board.setupInitialPosition();
+
+        assertNull(board.getSquare(3, 3));
+    }
+
     private void assertPiece(
             Board board,
             int row,
