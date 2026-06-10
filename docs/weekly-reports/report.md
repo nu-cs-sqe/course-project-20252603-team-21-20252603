@@ -69,7 +69,9 @@ Finishing from Week 4:
 **Planning and Progress Tracking**:
 1. [done] Ryan Lei: added the locale requirements, for English and Spanish, finished completely and merged from main
    - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/42
-3. [done] Ryan Lei: added a fully functional UI, with support for Spanish and English locales, with all functionality and the fully tested backend
+2. [done] Ryan Lei: added a fully functional UI, with support for Spanish and English locales, with all functionality and the fully tested backend
    - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/43
-5. [done] Ryan Lei: added integration testing on two key features, using Cucumber and Gherkin syntax along with step definitions.
+3. [done] Ryan Lei: added integration testing on two key features, using Cucumber and Gherkin syntax along with step definitions.
    - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/41
+4. [done] Sid Javeri: added all rules for valid chess game to game-rules.md
+   - https://github.com/nu-cs-sqe/course-project-20252603-team-21-20252603/pull/44
